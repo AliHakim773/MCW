@@ -3,7 +3,7 @@
     <nav class="site-nav-container">
       <div class="site-nav">
         <router-link class="site-nav-link" to="/">Home</router-link>
-        <router-link class="site-nav-link" to="/login">loggin</router-link>
+        <router-link class="site-nav-link" to="/login">login</router-link>
         <router-link class="site-nav-link" to="/register">Register</router-link>
         <router-link class="site-nav-link" to="/Movie">Movie</router-link>
         <router-link class="site-nav-link" to="/Profile">Profile</router-link>

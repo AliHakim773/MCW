@@ -1,8 +1,7 @@
 <template>
   <Mainbody>
     <div class="movie-main">
-      <aside class="div-comp movie-aside">
-        <img src="../../public/Lissa.png" class="movie-img" />
+      <Aside>
         <div class="movie-info-aside div-comp-white">
           <div class="aside-title title">Information</div>
           <span
@@ -13,7 +12,7 @@
           >
           <span>bla bla: <span class="info">yoo</span></span>
         </div>
-      </aside>
+      </Aside>
       <section class="div-comp movie-details">
         <div class="div-comp-white movie-comp">
           <div class="title m-title">Title:</div>
@@ -51,6 +50,7 @@
 import Mainbody from '@/components/Mainbody.vue'
 import Dropdown from '@/components/Dropdown.vue'
 import ModalForm from '@/components/ModalForm.vue'
+import Aside from '@/components/Aside.vue'
 
 export default {
   name: 'MovieView',
@@ -58,6 +58,7 @@ export default {
     Mainbody,
     Dropdown,
     ModalForm,
+    Aside,
   },
   data() {
     return {
@@ -81,6 +82,7 @@ export default {
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, maiores vero. Illo ipsa repudiandae accusantium beatae cupiditate id quisquam inventore minus? Ullam aperiam eaque reprehenderit harum natus temporibus sit voluptate, excepturi eius ipsam. Quaerat corrupti quas totam repellat vero inventore provident! Perferendis maiores culpa deserunt fugit, cum ab labore. Quas incidunt id consequatur, dignissimos unde, veniam amet pariatur dolorem hic mollitia, saepe alias aspernatur tempore ducimus. Commodi, expedita harum mollitia culpa aspernatur unde aliquid quidem suscipit optio molestias alias iure autem facilis consequatur corrupti debitis accusamus aut possimus cupiditate. Quaerat corporis neque hic quibusdam omnis earum ex facere ab. Odit?',
       movieDuration: '1h 30min',
       movieScore: 9,
+      movieYear: 2000,
     }
   },
 }
@@ -91,11 +93,11 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-.movie-aside {
+/* .movie-aside {
   width: 25%;
   display: flex;
   flex-direction: column;
-}
+} */
 .movie-details {
   width: 70%;
   display: flex;
@@ -103,13 +105,13 @@ export default {
   padding: 1rem;
 }
 
-.movie-img {
+/* .movie-img {
   border-radius: 0.5rem;
   aspect-ratio: 0.8;
   object-fit: cover;
 
   margin: 2rem 2rem;
-}
+} */
 .movie-info-aside {
   margin: 1rem 2rem;
   padding: 0.7rem 0.7rem 7rem 0.7rem;
