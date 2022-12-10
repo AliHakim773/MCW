@@ -7,6 +7,7 @@
         <router-link class="site-nav-link" to="/register">Register</router-link>
         <router-link class="site-nav-link" to="/Movie">Movie</router-link>
         <router-link class="site-nav-link" to="/Profile">Profile</router-link>
+        <router-link class="site-nav-link" to="/list">List</router-link>
       </div>
       <div class="search">
         <form>

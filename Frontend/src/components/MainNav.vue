@@ -1,6 +1,6 @@
 <template>
   <nav class="main-nav">
-    <span class="logo">MCW</span>
+    <router-link class="logo" to="/">MCW</router-link>
     <UserInfoLoggedOutVue v-if="IsLoggedOut" />
     <UserInfoLoggedInVue v-else />
   </nav>
@@ -36,5 +36,8 @@ export default {
   font-size: 3rem;
   color: var(--color-white);
   padding-left: 10px;
+}
+.logo:hover {
+  color: var(--color-white);
 }
 </style>
