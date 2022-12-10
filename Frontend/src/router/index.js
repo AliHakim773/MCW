@@ -38,7 +38,7 @@ const routes = [
     path: '/friends',
     name: 'friends',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/Friends.vue'),
+      import(/* webpackChunkName: "about" */ '../views/FriendsView.vue'),
   },
 ]
 

@@ -205,9 +205,9 @@ export default {
 }
 .followed-users img {
   height: 7rem;
-  aspect-ratio: 0.8;
   width: 23%;
   margin: 1%;
+  object-fit: cover;
 }
 .view-all {
   font-size: 0.6em;
