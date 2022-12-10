@@ -149,4 +149,4 @@ export default {
 }
 </style>
 
-//TODO: fix title (when it gets too big)
+//TODO(ALiHakim): fix title (when it gets too big)

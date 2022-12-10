@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       isComponentModalActive: false,
-    } //TODO: make isComponentModalActive a global variable
+    } //TODO(ALiHakim): make isComponentModalActive a global variable
   },
   methods: {
     handleCreate() {

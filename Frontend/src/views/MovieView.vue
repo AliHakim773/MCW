@@ -63,8 +63,8 @@ export default {
   data() {
     return {
       ListCategory: [
-        // { id: 1, listName: 'Marvel' },
-        // { id: 2, listName: 'roror' },
+        { id: 1, listName: 'Marvel' },
+        { id: 2, listName: 'roror' },
       ],
       ListRatings: [
         { id: 1, listName: '1' },
@@ -93,28 +93,16 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-/* .movie-aside {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-} */
 .movie-details {
   width: 70%;
   display: flex;
   flex-direction: column;
   padding: 1rem;
 }
-
-/* .movie-img {
-  border-radius: 0.5rem;
-  aspect-ratio: 0.8;
-  object-fit: cover;
-
-  margin: 2rem 2rem;
-} */
 .movie-info-aside {
   margin: 1rem 2rem;
-  padding: 0.7rem 0.7rem 7rem 0.7rem;
+  padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+  min-height: 15rem;
   display: flex;
   flex-direction: column;
 }
