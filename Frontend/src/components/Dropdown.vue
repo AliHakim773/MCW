@@ -2,11 +2,11 @@
   <div>
     <b-field>
       <b-select
-        :placeholder="placeholder"
+        :placeholder="computedPlaceholder"
         @change.native="ChangeCategory($event)"
         rounded
       >
-        <option v-if="list.length == 0" value="">Create a List</option>
+        <option v-if="list.length == 0" value="">Create a Category</option>
         <option v-else v-for="i in list" :key="i.id" value="i.listName">
           {{ i.listName }}
         </option>
@@ -22,6 +22,12 @@ export default {
     return {
       test: '',
     }
+  },
+  computed: {
+    computedPlaceholder() {
+      if (this.list.length == 0) return 'Create a category'
+      else return this.placeholder
+    },
   },
   methods: {
     ChangeCategory(event) {

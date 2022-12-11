@@ -4,16 +4,29 @@
       <router-link to="/profile">{{ Name }}</router-link
       >'s List
     </header>
-    <div class="div-comp-white list"><header><div class="category"></div>
-    <div class="list-header"></div></header></div>
+    <div class="div-comp-white list">
+      <header>
+        <div class="category"><Categories :list="ListCategory" /></div>
+        <div class="list-header"></div>
+      </header>
+    </div>
   </div>
 </template>
 <script>
+import Categories from '@/components/Categories.vue'
+
 export default {
   name: 'ListView',
+  components: {
+    Categories,
+  },
   data() {
     return {
       Name: 'BlackSea',
+      ListCategory: [
+        // { id: 1, listName: 'Marvel' },
+        // { id: 2, listName: 'roror' },
+      ],
     }
   },
 }
@@ -30,5 +43,9 @@ export default {
 }
 .list {
   margin: 1rem 10rem 10rem 10rem;
+}
+list header {
+  display: flex;
+  flex-direction: column;
 }
 </style>
