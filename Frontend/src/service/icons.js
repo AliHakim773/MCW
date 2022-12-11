@@ -7,9 +7,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-
-import { faFolderPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAngleDown,
+  faFolderPlus,
+  faTrashCan,
+} from '@fortawesome/free-solid-svg-icons'
 
 import {
   faFacebook,
@@ -27,7 +29,8 @@ library.add(
   faTwitter,
   faInstagram,
   faTiktok,
-  faFolderPlus
+  faFolderPlus,
+  faTrashCan
 )
 
 /* add font awesome icon component */

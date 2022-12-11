@@ -17,13 +17,18 @@
           <div class="list-title" style="width: 10%">score</div>
           <div class="list-title" style="width: 10%"></div>
         </div>
-        <ListItem
-          :number="number"
-          :score="score"
-          :title="title"
-          :deletable="deletable"
-          class="list-items"
-        />
+        <div v-if="movies.length != 0">
+          <ListItem
+            v-for="m in movies"
+            :number="movies.indexOf(m)"
+            :score="m.score"
+            :title="m.title"
+            :deletable="m.deletable"
+            :key="m.id"
+            class="list-items"
+          />
+        </div>
+        <div v-else class="empth-list">Your List Is empty</div>
       </header>
     </div>
   </div>
@@ -46,10 +51,38 @@ export default {
         // { id: 2, listName: 'roror' },
       ],
       CurrentList: 'Current List Name',
-      number: 1,
-      title: 'Title',
-      score: '8',
-      deletable: false,
+      movies: [
+        // {
+        //   id: 0,
+        //   title: 'Title',
+        //   score: '8',
+        //   deletable: false,
+        // },
+        // {
+        //   id: 1,
+        //   title: 'Title',
+        //   score: '8',
+        //   deletable: false,
+        // },
+        // {
+        //   id: 2,
+        //   title: 'Title',
+        //   score: '8',
+        //   deletable: false,
+        // },
+        // {
+        //   id: 3,
+        //   title: 'Title',
+        //   score: '8',
+        //   deletable: false,
+        // },
+        // {
+        //   id: 4,
+        //   title: 'Title',
+        //   score: '8',
+        //   deletable: false,
+        // },
+      ],
     }
   },
 }
@@ -98,5 +131,14 @@ export default {
 }
 .list-title:not(:first-child) {
   border-left: 1px solid var(--color-grey);
+}
+.empth-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  font-size: 2.4rem;
+  font-weight: 500;
+  opacity: 0.6;
 }
 </style>

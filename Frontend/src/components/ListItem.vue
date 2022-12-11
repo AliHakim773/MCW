@@ -6,13 +6,25 @@
     </div>
     <div class="list-cell list-cell-title" style="width: 65%">{{ title }}</div>
     <div class="list-cell" style="width: 10%">{{ score }}</div>
-    <div class="list-cell" style="width: 10%"></div>
+    <div class="list-cell" style="width: 10%">
+      <font-awesome-icon
+        v-if="deletable"
+        icon="fa-solid fa-trash-can"
+        class="delete-item"
+        @click="test()"
+      />
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: 'ListItem',
   props: ['number', 'title', 'score', 'deletable'],
+  methods: {
+    test() {
+      console.log('test')
+    },
+  },
 }
 </script>
 <style scoped>
@@ -45,5 +57,9 @@ export default {
   display: flex;
   justify-content: flex-start;
   padding-left: 2rem;
+}
+.delete-item:hover {
+  color: var(--color-danger);
+  cursor: pointer;
 }
 </style>
