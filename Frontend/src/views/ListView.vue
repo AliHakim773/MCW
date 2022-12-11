@@ -44,8 +44,12 @@ export default {
 .list {
   margin: 1rem 10rem 10rem 10rem;
 }
-list header {
+.list header {
   display: flex;
   flex-direction: column;
+}
+.category {
+  display: flex;
+  justify-content: end;
 }
 </style>

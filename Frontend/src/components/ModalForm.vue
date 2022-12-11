@@ -56,6 +56,10 @@ export default {
 }
 </script>
 <style scoped>
+/* Buefy had overflow removed when opening the Modal */
+.is-cliped {
+  overflow-y: scroll !important;
+}
 .add-cat {
   background-color: var(--color-white);
   border: none;
