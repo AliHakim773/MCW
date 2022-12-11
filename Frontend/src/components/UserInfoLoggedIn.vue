@@ -9,7 +9,10 @@
       {{ userName }} <font-awesome-icon icon="fa-solid fa-angle-down" />
       <div v-if="!hidden" class="user-settings">
         <ul role="list">
-          <li>Profile</li>
+          <li>
+            <a @click="test()" href="http://localhost:8080/Profile">Profile</a
+            >//TODO(ALIHakim):fix the frop down
+          </li>
           <li>List</li>
           <li>Logout</li>
         </ul>
@@ -33,6 +36,9 @@ export default {
   methods: {
     toggleHidden() {
       this.hidden = !this.hidden
+    },
+    test() {
+      console.log('tst')
     },
   },
 }
