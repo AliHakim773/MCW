@@ -18,11 +18,6 @@
 export default {
   name: 'DropDown',
   props: ['list', 'category', 'placeholder'],
-  data() {
-    return {
-      test: '',
-    }
-  },
   computed: {
     computedPlaceholder() {
       if (this.list.length == 0) return 'Create a category'
