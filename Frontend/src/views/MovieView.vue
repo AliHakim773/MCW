@@ -19,15 +19,7 @@
           <div class="title score">Score: {{ movieScore }} | 10</div>
         </div>
         <div class="dropdown-group">
-          <div class="add-category">
-            <ModalForm class="dropdown-item add-category-item" />
-            <Dropdown
-              class="dropdown-item add-category-item"
-              :list="ListCategory"
-              :category="true"
-              placeholder="Select a List"
-            ></Dropdown>
-          </div>
+          <Categories :List="ListCategory" />
 
           <Dropdown
             class="dropdown-item"
@@ -49,7 +41,7 @@
 <script>
 import Mainbody from '@/components/Mainbody.vue'
 import Dropdown from '@/components/Dropdown.vue'
-import ModalForm from '@/components/ModalForm.vue'
+import Categories from '@/components/Categories.vue'
 import Aside from '@/components/Aside.vue'
 
 export default {
@@ -57,7 +49,7 @@ export default {
   components: {
     Mainbody,
     Dropdown,
-    ModalForm,
+    Categories,
     Aside,
   },
   data() {
@@ -132,13 +124,13 @@ export default {
 .dropdown-item {
   margin: 0 1rem;
 }
-.add-category {
+/* .add-category {
   display: flex;
-}
-.add-category-item {
+} */
+/* .add-category-item {
   margin: 0;
   padding-inline: 5px;
-}
+} */
 .synopsis {
   margin: 1rem 0;
   padding: 2rem;

@@ -4,7 +4,8 @@
       <router-link to="/profile">{{ Name }}</router-link
       >'s List
     </header>
-    <div class="div-comp-white list"><header>hello</header></div>
+    <div class="div-comp-white list"><header><div class="category"></div>
+    <div class="list-header"></div></header></div>
   </div>
 </template>
 <script>
