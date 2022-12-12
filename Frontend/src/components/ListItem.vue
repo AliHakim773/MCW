@@ -4,11 +4,11 @@
     <div class="list-cell list-cell-img" style="width: 10%">
       <img src="../../public/Lissa.png" class="list-img" :alt="title" />
     </div>
-    <div class="list-cell list-cell-title" style="width: 65%">{{ title }}</div>
+    <div class="list-cell list-cell-title" style="width: 55%">{{ title }}</div>
+    <div class="list-cell" style="width: 10%"></div>
     <div class="list-cell" style="width: 10%">{{ score }}</div>
     <div class="list-cell" style="width: 10%">
       <font-awesome-icon
-        v-if="deletable"
         icon="fa-solid fa-trash-can"
         class="delete-item"
         @click="test()"
@@ -19,7 +19,7 @@
 <script>
 export default {
   name: 'ListItem',
-  props: ['number', 'title', 'score', 'deletable'],
+  props: ['number', 'title', 'score'],
   methods: {
     test() {
       console.log('test')

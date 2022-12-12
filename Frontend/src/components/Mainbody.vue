@@ -8,6 +8,9 @@
         <router-link class="site-nav-link" to="/Movie">Movie</router-link>
         <router-link class="site-nav-link" to="/Profile">Profile</router-link>
         <router-link class="site-nav-link" to="/list">List</router-link>
+        <router-link class="site-nav-link" to="/topmovies"
+          >Top Movies</router-link
+        >
       </div>
       <div class="search">
         <form>

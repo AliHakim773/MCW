@@ -13,7 +13,8 @@
         <div class="list-nav">
           <div class="list-title" style="width: 5%">#</div>
           <div class="list-title" style="width: 10%">Image</div>
-          <div class="list-title" style="width: 65%">Title</div>
+          <div class="list-title" style="width: 55%">Title</div>
+          <div class="list-title" style="width: 10%">Category</div>
           <div class="list-title" style="width: 10%">score</div>
           <div class="list-title" style="width: 10%"></div>
         </div>
@@ -23,7 +24,6 @@
             :number="movies.indexOf(m)"
             :score="m.score"
             :title="m.title"
-            :deletable="m.deletable"
             :key="m.id"
             class="list-items"
           />
@@ -52,36 +52,31 @@ export default {
       ],
       CurrentList: 'Current List Name',
       movies: [
-        // {
-        //   id: 0,
-        //   title: 'Title',
-        //   score: '8',
-        //   deletable: false,
-        // },
-        // {
-        //   id: 1,
-        //   title: 'Title',
-        //   score: '8',
-        //   deletable: false,
-        // },
-        // {
-        //   id: 2,
-        //   title: 'Title',
-        //   score: '8',
-        //   deletable: false,
-        // },
-        // {
-        //   id: 3,
-        //   title: 'Title',
-        //   score: '8',
-        //   deletable: false,
-        // },
-        // {
-        //   id: 4,
-        //   title: 'Title',
-        //   score: '8',
-        //   deletable: false,
-        // },
+        {
+          id: 0,
+          title: 'Title',
+          score: '8',
+        },
+        {
+          id: 1,
+          title: 'Title',
+          score: '8',
+        },
+        {
+          id: 2,
+          title: 'Title',
+          score: '8',
+        },
+        {
+          id: 3,
+          title: 'Title',
+          score: '8',
+        },
+        {
+          id: 4,
+          title: 'Title',
+          score: '8',
+        },
       ],
     }
   },

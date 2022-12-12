@@ -46,6 +46,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/ListView.vue'),
   },
+  {
+    path: '/topmovies',
+    name: 'topmoves',
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/TopMoviesView.vue'),
+  },
 ]
 
 const router = new VueRouter({
