@@ -4,8 +4,16 @@
     <div class="list-cell list-cell-img" style="width: 10%">
       <img src="../../public/Lissa.png" class="list-img" :alt="title" />
     </div>
-    <div class="list-cell list-cell-title" style="width: 55%">{{ title }}</div>
-    <div class="list-cell" style="width: 10%"></div>
+    <div class="list-cell list-cell-title" style="width: 50%">{{ title }}</div>
+    <div class="list-cell" style="width: 15%">
+      <b-field>
+        <b-select placeholder="Select a Category" class="list-category-select">
+          <option v-for="option in data" :value="option.id" :key="option.id">
+            {{ option.name }}
+          </option>
+        </b-select>
+      </b-field>
+    </div>
     <div class="list-cell" style="width: 10%">{{ score }}</div>
     <div class="list-cell" style="width: 10%">
       <font-awesome-icon
