@@ -12,8 +12,15 @@
   </tr>
 </template>
 <script>
+// import axios from 'axios'
+
 export default {
   name: 'TopMoviesRow',
   props: ['rank', 'name', 'imgSrc', 'userScore', 'avgScore'],
+  data() {
+    return {
+      movies: [],
+    }
+  },
 }
 </script>
