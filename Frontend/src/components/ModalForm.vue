@@ -57,6 +57,7 @@ export default {
 </script>
 <style scoped>
 /* Buefy had overflow removed when opening the Modal */
+/* TODO(AliHakim):add this to the global css */
 .is-cliped {
   overflow-y: scroll !important;
 }
