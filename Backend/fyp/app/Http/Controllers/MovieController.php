@@ -33,7 +33,8 @@ class MovieController extends Controller
             'genre_id '=>'selecting genre is required'
 
         ]);
-        return Movie::create($request->all());
+        Movie::create($request->all());
+        return $request;
     }
 
     /**
@@ -54,11 +55,13 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        $movie = Movies::find($id);
-        $movie->update($request->all());
-        return $movie;
+        $movie = Movie::find($id);
+
+         $movie->update($request->all());
+        return $request;
+
     }
 
     /**

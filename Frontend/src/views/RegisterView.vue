@@ -14,21 +14,17 @@
           <b-input type="password" required v-model="password" password-reveal>
           </b-input>
         </b-field>
-        <b-button
-          class="register-btn"
-          native-type="submit"
-          tag="input"
-          type="is-primary"
-          value="Sign Up"
-        />
-        <input type="submit" name="" id="" />
+        <button type="submit">Sign Up</button>
+
       </form>
     </div>
   </Mainbody>
 </template>
+
 <script>
 import Mainbody from '@/components/Mainbody.vue'
-import axios from 'axios'
+
+import axios from "axios";
 
 export default {
   name: 'RegisterView',
@@ -37,6 +33,7 @@ export default {
   },
   data() {
     return {
+
       Username: '',
       Email: '',
       password: '',

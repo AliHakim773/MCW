@@ -3,7 +3,7 @@
     <div class="home-wrapper">
       <main class="main-home">
         <Carousel class="carousel" :title="title" :link="link" />
-        <Carousel class="carousel" :title="title" :link="link" />
+        <Carousel class="carousel" :title="title2" :link="link" />
       </main>
       <aside class="aside-home div-comp">
         <div class="aside-comp">
@@ -60,7 +60,8 @@ export default {
   },
   data() {
     return {
-      title: 'Title',
+      title: 'TOP',
+      title2:'RECENT',
       link: '/register',
       recentUpdates: [
         {
