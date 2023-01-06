@@ -13,8 +13,8 @@
         <div class="list-nav">
           <div class="list-title" style="width: 5%">#</div>
           <div class="list-title" style="width: 10%">Image</div>
-          <div class="list-title" style="width: 55%">Title</div>
-          <div class="list-title" style="width: 10%">Category</div>
+          <div class="list-title" style="width: 50%">Title</div>
+          <div class="list-title" style="width: 15%">Category</div>
           <div class="list-title" style="width: 10%">score</div>
           <div class="list-title" style="width: 10%"></div>
         </div>
