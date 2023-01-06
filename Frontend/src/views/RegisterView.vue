@@ -1,7 +1,7 @@
 <template>
   <Mainbody>
     <div class="register-wrapper">
-      <form class="register-form" action="">
+      <form class="register-form" @submit.prevent="hundelSubmit">
         <div class="register-form-title">Register</div>
         <b-field label="Username">
           <b-input v-model="Username" required maxlength="24"></b-input>
@@ -21,12 +21,14 @@
           type="is-primary"
           value="Sign Up"
         />
+        <input type="submit" name="" id="" />
       </form>
     </div>
   </Mainbody>
 </template>
 <script>
 import Mainbody from '@/components/Mainbody.vue'
+import axios from 'axios'
 
 export default {
   name: 'RegisterView',
@@ -39,6 +41,25 @@ export default {
       Email: '',
       password: '',
     }
+  },
+  methods: {
+    hundelSubmit() {
+      const data = {
+        name: this.Username,
+        email: this.Email,
+        pass: this.password,
+      }
+
+      axios
+        .post('http://127.0.0.1:8000/register', data)
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      console.log(data)
+    },
   },
 }
 </script>

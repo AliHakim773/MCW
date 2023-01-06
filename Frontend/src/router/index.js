@@ -52,6 +52,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/TopMoviesView.vue'),
   },
+  {
+    path: '/forums',
+    name: 'forums',
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/ForumsView.vue'),
+  },
 ]
 
 const router = new VueRouter({
