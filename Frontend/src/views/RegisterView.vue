@@ -1,7 +1,7 @@
 <template>
   <Mainbody>
     <div class="register-wrapper">
-      <form class="register-form" action="">
+      <form class="register-form" @submit.prevent="register" action="">
         <div class="register-form-title">Register</div>
         <b-field label="Username">
           <b-input v-model="Username" required maxlength="24"></b-input>
@@ -14,20 +14,16 @@
           <b-input type="password" required v-model="password" password-reveal>
           </b-input>
         </b-field>
-        <b-button
-          class="register-btn"
-          native-type="submit"
-          tag="input"
-          type="is-primary"
-          value="Sign Up"
-        />
+        <button type="submit">Sign Up</button>
+
       </form>
     </div>
   </Mainbody>
 </template>
+
 <script>
 import Mainbody from '@/components/Mainbody.vue'
-
+import axios from "axios";
 export default {
   name: 'RegisterView',
   components: {
@@ -35,10 +31,25 @@ export default {
   },
   data() {
     return {
+
       Username: '',
       Email: '',
       password: '',
     }
+  },
+  methods: {
+
+    register() {
+      console.log({"user":this.Username,
+        "email":this.Email,
+        "password":this.password})
+      axios.post('http://localhost:8000/api/register',{user:this.Username,
+      email:this.Email,
+      password:this.password}).then(()=>{console.log("registered")}).
+      catch ((error)=> {
+        console.log(error);
+      })
+    },
   },
 }
 </script>

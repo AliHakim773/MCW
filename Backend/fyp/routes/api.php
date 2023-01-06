@@ -28,6 +28,7 @@ use App\Http\Controllers\ForumController;
 //Route::put('/movie/{id}',[MovieController::class,'update']);
 
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/users', [AuthController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::apiResources([
     'movies' => MovieController::class,

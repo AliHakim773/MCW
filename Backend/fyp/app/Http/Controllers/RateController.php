@@ -32,13 +32,14 @@ class RateController extends Controller
             'movie_id'=>'required'
 
         ]);
-        $rate=Rate::where('user_iif($rate!=null){
-//           //if this rate already exists ,then we need to update it
-//       $this->update($request,$rate->id);
-//       }d',$request->userID)->where('movie_id',$request->movie_id)->first();
-//
-       //if not then this is a new rate, and we create it
-               return Rate::create($request->all());
+        $rate = Rate::where(['user_id' => $request->user_id, 'movie_id' => $request->movie_id])->first();
+
+        if ($rate === null) {
+            return Rate::create($request->all());
+        }
+            return $rate->update($request->all());
+
+
 
     }
 

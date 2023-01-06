@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        return User::all();
+    }
     public function register(Request $request){
         $fields = $request->validate([
-            'name'=>'required|string',
             'email'=>'required|string|unique:users,email',
+            'name'=>'required|string',
+
             'password'=>'required'
         ]);
 
