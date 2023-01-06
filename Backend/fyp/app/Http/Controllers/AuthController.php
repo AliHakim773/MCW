@@ -38,7 +38,7 @@ class AuthController extends Controller
             'token'=>$token
         ];
         return response($response,201);
-
+//test
     }
     public function login(Request $request){
         $fields = $request->validate([
