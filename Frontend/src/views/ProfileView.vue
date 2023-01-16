@@ -29,7 +29,12 @@
       </Aside>
       <section class="div-comp profile-details">
         <div class="div-comp-white profile-comp">
-          <div class="title">{{ username }}</div>
+          <div class="title">
+            {{ username }} &nbsp; - &nbsp;
+            <router-link to="/editprofile" class="small-link"
+              >Edit Profile</router-link
+            >
+          </div>
           <p class="userDescription">{{ userDescription }}</p>
         </div>
         <div class="div-comp-white list-stats">
@@ -221,6 +226,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+.small-link {
+  font-size: 0.5em;
+  vertical-align: middle;
 }
 </style>
 

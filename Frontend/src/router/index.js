@@ -64,6 +64,14 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "forum" */ '../views/ForumView.vue'),
   },
+  {
+    path: '/editprofile',
+    name: 'editprofile',
+    component: () =>
+      import(
+        /* webpackChunkName: "editprofile" */ '../views/EditProfileView.vue'
+      ),
+  },
 ]
 
 const router = new VueRouter({
