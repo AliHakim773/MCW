@@ -4,6 +4,7 @@
       <main class="main-home">
         <Carousel class="carousel" :title="title" :link="link" />
         <Carousel class="carousel" :title="title2" :link="link" />
+        <TopForums />
       </main>
       <aside class="aside-home div-comp">
         <div class="aside-comp">
@@ -45,6 +46,7 @@
   </Mainbody>
 </template>
 <script>
+import TopForums from '@/components/TopForums.vue'
 import Carousel from '@/components/Carousel.vue'
 import ListItemSmall from '@/components/ListItemSmall.vue'
 import ReviewSmall from '@/components/ReviewSmall.vue'
@@ -53,6 +55,7 @@ import Mainbody from '@/components/Mainbody.vue'
 export default {
   name: 'HomeView',
   components: {
+    TopForums,
     Carousel,
     ListItemSmall,
     ReviewSmall,
@@ -61,7 +64,7 @@ export default {
   data() {
     return {
       title: 'TOP',
-      title2:'RECENT',
+      title2: 'RECENT',
       link: '/register',
       recentUpdates: [
         {

@@ -48,21 +48,21 @@ const routes = [
   },
   {
     path: '/topmovies',
-    name: 'topmoves',
+    name: 'topmovies',
     component: () =>
-      import(/* webpackChunkName: "forums" */ '../views/TopMoviesView.vue'),
+      import(/* webpackChunkName: "topmovies" */ '../views/TopMoviesView.vue'),
   },
   {
     path: '/forums',
     name: 'forums',
     component: () =>
-      import(/* webpackChunkName: "forum" */ '../views/ForumsView.vue'),
+      import(/* webpackChunkName: "forums" */ '../views/ForumsView.vue'),
   },
   {
     path: '/forum',
     name: 'forum',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/ForumView.vue'),
+      import(/* webpackChunkName: "forum" */ '../views/ForumView.vue'),
   },
 ]
 

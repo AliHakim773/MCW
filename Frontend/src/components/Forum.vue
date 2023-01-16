@@ -1,9 +1,9 @@
 <template>
-  <div class="forum-body">
+  <div :class="border ? 'border-forum forum-body' : 'forum-body'">
     <div class="forums-figure" @click="goToUser">
-      <img src="../../public/Lissa.png" class="forum-img" />
       <div class="forums-credit">By: {{ UserName }}</div>
       <div class="forums-date">{{ submitDate }}</div>
+      <!-- <img src="../../public/Lissa.png" class="forum-img" /> -->
     </div>
     <div class="forum-information">
       <div class="forum-title" @click="goToForum">{{ title }}</div>
@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'ForumsComponent',
-  props: ['UserName', 'submitDate', 'ImgUrl', 'title', 'content'],
+  props: ['UserName', 'submitDate', 'ImgUrl', 'title', 'content', 'border'],
   methods: {
     goToForum() {
       this.$router.push('/forum')
@@ -32,6 +32,8 @@ export default {
   display: flex;
   min-height: 15rem;
   border-bottom: 1px solid var(--color-grey);
+}
+.border-forum {
   border-left: 1px solid var(--color-grey);
   border-right: 1px solid var(--color-grey);
 }
