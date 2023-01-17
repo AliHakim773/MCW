@@ -1,18 +1,12 @@
 <template>
   <div class="user-info-container">
-    <div
-      class="user-name"
-      @focus="toggleHidden()"
-      @focusout="toggleHidden()"
-      tabindex="0"
-    >
+    <div class="user-name" tabindex="0">
       {{ userName }} <font-awesome-icon icon="fa-solid fa-angle-down" />
-      <div v-if="!hidden" class="user-settings">
+      <div class="user-settings">
         <ul role="list">
           <li>
-            <a @click="test()" href="http://localhost:8080/Profile">Profile</a
-            >
-<!--            TODO(ALIHakim):fix the frop down-->
+            <a @click="test" href="http://localhost:8080/Profile">Profile</a>
+            <!-- TODO(ALIHakim):fix the frop down -->
           </li>
           <li>List</li>
           <li>Logout</li>
@@ -36,9 +30,9 @@ export default {
     }
   },
   methods: {
-    toggleHidden() {
-      this.hidden = !this.hidden
-    },
+    // toggleHidden() {
+    //   this.hidden = !this.hidden
+    // },
     test() {
       console.log('tst')
     },
@@ -74,8 +68,9 @@ export default {
   font-weight: bold;
   border: 3px solid var(--primary-color);
   border-radius: 3px;
-  display: flex;
+  display: none;
   justify-content: center;
+  z-index: 10;
 }
 .user-settings > ul {
   width: 100%;
@@ -88,5 +83,9 @@ export default {
 }
 .user-settings li:last-child {
   border-bottom: none;
+}
+.user-name:focus > .user-settings,
+.user-settings:hover {
+  display: flex;
 }
 </style>

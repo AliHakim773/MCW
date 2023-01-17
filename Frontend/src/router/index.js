@@ -32,31 +32,45 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/ProfileView.vue'),
+      import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
   },
   {
     path: '/friends',
     name: 'friends',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/FriendsView.vue'),
+      import(/* webpackChunkName: "friends" */ '../views/FriendsView.vue'),
   },
   {
     path: '/list',
     name: 'list',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/ListView.vue'),
+      import(/* webpackChunkName: "list" */ '../views/ListView.vue'),
   },
   {
     path: '/topmovies',
-    name: 'topmoves',
+    name: 'topmovies',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/TopMoviesView.vue'),
+      import(/* webpackChunkName: "topmovies" */ '../views/TopMoviesView.vue'),
   },
   {
     path: '/forums',
     name: 'forums',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/ForumsView.vue'),
+      import(/* webpackChunkName: "forums" */ '../views/ForumsView.vue'),
+  },
+  {
+    path: '/forum',
+    name: 'forum',
+    component: () =>
+      import(/* webpackChunkName: "forum" */ '../views/ForumView.vue'),
+  },
+  {
+    path: '/editprofile',
+    name: 'editprofile',
+    component: () =>
+      import(
+        /* webpackChunkName: "editprofile" */ '../views/EditProfileView.vue'
+      ),
   },
 ]
 

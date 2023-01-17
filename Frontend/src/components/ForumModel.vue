@@ -1,8 +1,8 @@
 <template>
   <section>
-    <button class="add-cat" @click="isComponentModalActive = true">
-      <font-awesome-icon icon="fa-solid fa-folder-plus" />
-    </button>
+    <span class="create-forums-btn" @click="isComponentModalActive = true">
+      Create Forum
+    </span>
 
     <b-modal
       scroll="keep"
@@ -26,8 +26,11 @@
             />
           </header>
           <section class="modal-card-body">
-            <b-field label="Category Name">
-              <b-input type="Name" :value="Name"> </b-input>
+            <b-field label="Title">
+              <b-input type="Title"> </b-input>
+            </b-field>
+            <b-field label="Body">
+              <b-input type="textarea"> </b-input>
             </b-field>
           </section>
           <footer class="modal-card-foot">
@@ -39,15 +42,13 @@
     </b-modal>
   </section>
 </template>
-
 <script>
 export default {
-  name: 'ModalForm',
-  props: ['Name'],
+  name: 'ForumModel',
   data() {
     return {
       isComponentModalActive: false,
-    } //TODO(ALiHakim): make isComponentModalActive a global variable
+    }
   },
   methods: {
     handleCreate() {
@@ -57,18 +58,15 @@ export default {
 }
 </script>
 <style scoped>
-/* Buefy had overflow removed when opening the Modal */
-/* TODO(AliHakim):add this to the global css */
-.is-cliped {
-  overflow-y: scroll !important;
+.create-forums-btn {
+  color: var(--primary-color);
+  border: 1px solid var(--color-grey);
+  border-radius: 1rem;
+  padding: 0.3rem;
+  margin-bottom: 1rem;
 }
-.add-cat {
-  background-color: var(--color-white);
-  border: none;
-  border-radius: 2rem;
-  width: 40px;
-  height: 40px;
+.create-forums-btn:hover {
   color: var(--color-black);
-  font-weight: 800;
+  cursor: pointer;
 }
 </style>

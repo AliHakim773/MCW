@@ -1,29 +1,30 @@
 <template>
   <div>
-    <Mainbody
-      ><main>
-        <div class="forums-header">
-          <ForumModel></ForumModel>
-        </div>
-        <div class="forums">
-          <Forum
-            v-for="forum in ForumsList"
-            :user-name="forum.UserName"
-            :submitDate="forum.Date"
-            :title="forum.Title"
-            :content="forum.Content"
-            :key="ForumsList.indexOf(forum)"
-          />
-        </div></main
-    ></Mainbody>
+    <div class="more-info">
+      <span class="forums-title">TOP FORUMS</span>
+      <router-link :to="link">view more</router-link>
+    </div>
+    <div class="forums-list">
+      <Forum
+        v-for="forum in ForumsList"
+        :user-name="forum.UserName"
+        :submitDate="forum.Date"
+        :title="forum.Title"
+        :content="forum.Content"
+        :key="ForumsList.indexOf(forum)"
+        border="false"
+      />
+    </div>
   </div>
 </template>
 <script>
-import Mainbody from '@/components/Mainbody.vue'
-import Forum from '@/components/Forum.vue'
-import ForumModel from '@/components/ForumModel.vue'
+import Forum from './Forum.vue'
+
 export default {
-  name: 'ForumsView',
+  name: 'TopForums',
+  components: {
+    Forum,
+  },
   data() {
     return {
       ForumsList: [
@@ -62,20 +63,22 @@ export default {
       ],
     }
   },
-  components: {
-    Mainbody,
-    Forum,
-    ForumModel,
-  },
 }
 </script>
 <style scoped>
-main {
-  margin: 1.5rem;
-  padding: 0.5rem;
+.forums-title {
+  font-weight: 600;
+  color: var(--color-black);
 }
-.forums-header {
-  border-bottom: 1px solid var(--color-grey);
-  padding-bottom: 1rem;
+.more-info {
+  display: flex;
+  font-weight: 600;
+  color: var(--primary-color);
+  justify-content: space-between;
+}
+.forums-list {
+  background-color: var(--secondary-bg-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 </style>
