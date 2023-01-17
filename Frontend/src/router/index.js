@@ -8,22 +8,22 @@ const routes = [
     path: '/',
     name: 'home',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/HomeView.vue'),
+      import(/* webpackChunkName: "home" */ '../views/HomeView.vue'),
   },
   {
     path: '/login',
     name: 'login',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/LoginView.vue'),
+      import(/* webpackChunkName: "login" */ '../views/LoginView.vue'),
   },
   {
     path: '/register',
     name: 'register',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/RegisterView.vue'),
+      import(/* webpackChunkName: "register" */ '../views/RegisterView.vue'),
   },
   {
-    path: '/movie/:id',
+    path: '/movie',
     name: 'movie',
     component: () =>
       import(/* webpackChunkName: "movie" */ '../views/MovieView.vue'),

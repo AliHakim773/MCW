@@ -1,10 +1,7 @@
 <template>
   <Mainbody>
     <div class="home-wrapper">
-      <h1 v-if="user">HI, {{user.name}}</h1>
-      <h1 v-if="!user">HI,you are not logged in</h1>
       <main class="main-home">
-
         <Carousel class="carousel" :title="title" :link="link" />
         <Carousel class="carousel" :title="title2" :link="link" />
         <TopForums />
@@ -66,7 +63,7 @@ export default {
   },
   data() {
     return {
-      user:null,
+      user: null,
       title: 'TOP',
       title2: 'RECENT',
       link: '/register',
@@ -119,11 +116,11 @@ export default {
       date: 'sometime',
     }
   },
- async created() {
-    const res= await axios.get('user')
-   console.log(res)
-   this.user=res.data
-  }
+  async created() {
+    const res = await axios.get('user')
+    console.log(res)
+    this.user = res.data
+  },
 }
 </script>
 <style scoped>
