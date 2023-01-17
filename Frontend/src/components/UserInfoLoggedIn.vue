@@ -11,7 +11,8 @@
         <ul role="list">
           <li>
             <a @click="test()" href="http://localhost:8080/Profile">Profile</a
-            >//TODO(ALIHakim):fix the frop down
+            >
+<!--            TODO(ALIHakim):fix the frop down-->
           </li>
           <li>List</li>
           <li>Logout</li>
@@ -24,6 +25,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'UserInfoLoggedIn',
   data() {
@@ -40,6 +42,7 @@ export default {
     test() {
       console.log('tst')
     },
+    ...mapGetters(['user'])
   },
 }
 </script>

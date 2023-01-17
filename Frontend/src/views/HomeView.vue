@@ -1,9 +1,13 @@
 <template>
   <Mainbody>
     <div class="home-wrapper">
+      <h1 v-if="user">HI, {{user.name}}</h1>
+      <h1 v-if="!user">HI,you are not logged in</h1>
       <main class="main-home">
+
         <Carousel class="carousel" :title="title" :link="link" />
         <Carousel class="carousel" :title="title2" :link="link" />
+
       </main>
       <aside class="aside-home div-comp">
         <div class="aside-comp">
@@ -49,7 +53,7 @@ import Carousel from '@/components/Carousel.vue'
 import ListItemSmall from '@/components/ListItemSmall.vue'
 import ReviewSmall from '@/components/ReviewSmall.vue'
 import Mainbody from '@/components/Mainbody.vue'
-
+import axios from 'axios'
 export default {
   name: 'HomeView',
   components: {
@@ -60,6 +64,7 @@ export default {
   },
   data() {
     return {
+      user:null,
       title: 'TOP',
       title2:'RECENT',
       link: '/register',
@@ -112,6 +117,11 @@ export default {
       date: 'sometime',
     }
   },
+ async created() {
+    const res= await axios.get('user')
+   console.log(res)
+   this.user=res.data
+  }
 }
 </script>
 <style scoped>

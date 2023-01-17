@@ -1,40 +1,49 @@
 <template>
   <Mainbody>
     <div class="login-wrapper">
-      <form class="login-form" action="">
+      <form class="login-form" @submit.prevent="hundelLogin">
         <div class="login-form-title">Login</div>
-        <b-field label="Username">
-          <b-input required maxlength="30"></b-input>
+        <b-field label="Email">
+          <b-input type="email" v-model="Username" required ></b-input>
         </b-field>
         <b-field label="Password">
           <b-input type="password" required v-model="password" password-reveal>
           </b-input>
         </b-field>
-        <b-button
-          class="login-btn"
-          native-type="submit"
-          tag="input"
-          type="is-primary"
-          value="Login"
-        />
+        <button type="submit">Login</button>
       </form>
     </div>
   </Mainbody>
 </template>
 <script>
 import Mainbody from '@/components/Mainbody.vue'
+import axios from "axios";
 
 export default {
   name: 'LoginView',
   components: {
     Mainbody,
   },
+
   data() {
     return {
       Username: '',
       password: '',
     }
   },
+  methods:{
+     async hundelLogin() {
+     const res=await axios.post('login', {
+       email: this.Username,
+       password: this.password,
+     })
+       console.log(res)
+       localStorage.setItem('token',res.data.token)
+      this.$router.push('/')
+    }
+
+  },
+
 }
 </script>
 <style scoped>

@@ -5,6 +5,7 @@
     </button>
 
     <b-modal
+      scroll="keep"
       v-model="isComponentModalActive"
       has-modal-card
       trap-focus

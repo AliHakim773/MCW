@@ -1,6 +1,6 @@
 <template>
   <aside class="div-comp movie-aside">
-    <img src="../../public/Lissa.png" class="movie-img" />
+    <img :src="imgLink" class="movie-img" />
     <slot></slot>
   </aside>
 </template>
@@ -19,7 +19,7 @@ export default {
 .movie-img {
   border-radius: 0.5rem;
   aspect-ratio: 0.8;
-  object-fit: cover;
+  object-fit: fill;
 
   margin: 2rem 2rem;
 }

@@ -1,7 +1,7 @@
 <template>
   <Mainbody>
     <div class="movie-main">
-      <Aside>
+      <Aside :img-link="moviePosterUrl">
         <div class="movie-info-aside div-comp-white">
           <div class="aside-title title">Information</div>
           <span
@@ -10,12 +10,12 @@
           <span
             >Duration: <span class="info">{{ movieDuration }}</span></span
           >
-          <span>bla bla: <span class="info">yoo</span></span>
+          <span>Genre: <span class="info">{{movieGenre}}</span></span>
         </div>
       </Aside>
       <section class="div-comp movie-details">
         <div class="div-comp-white movie-comp">
-          <div class="title m-title">Title:</div>
+          <div class="title m-title">{{movieTitle}}</div>
           <div class="title score">Score: {{ movieScore }} | 10</div>
         </div>
         <div class="dropdown-group">
@@ -43,6 +43,7 @@ import Mainbody from '@/components/Mainbody.vue'
 import Dropdown from '@/components/Dropdown.vue'
 import Categories from '@/components/Categories.vue'
 import Aside from '@/components/Aside.vue'
+import axios from "axios";
 
 export default {
   name: 'MovieView',
@@ -54,10 +55,7 @@ export default {
   },
   data() {
     return {
-      ListCategory: [
-        { id: 1, listName: 'Marvel' },
-        { id: 2, listName: 'roror' },
-      ],
+      ListCategory: [],
       ListRatings: [
         { id: 1, listName: '1' },
         { id: 2, listName: '2' },
@@ -70,12 +68,45 @@ export default {
         { id: 9, listName: '9' },
         { id: 10, listName: '10' },
       ],
-      movieSynopsis:
-        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, maiores vero. Illo ipsa repudiandae accusantium beatae cupiditate id quisquam inventore minus? Ullam aperiam eaque reprehenderit harum natus temporibus sit voluptate, excepturi eius ipsam. Quaerat corrupti quas totam repellat vero inventore provident! Perferendis maiores culpa deserunt fugit, cum ab labore. Quas incidunt id consequatur, dignissimos unde, veniam amet pariatur dolorem hic mollitia, saepe alias aspernatur tempore ducimus. Commodi, expedita harum mollitia culpa aspernatur unde aliquid quidem suscipit optio molestias alias iure autem facilis consequatur corrupti debitis accusamus aut possimus cupiditate. Quaerat corporis neque hic quibusdam omnis earum ex facere ab. Odit?',
+      movieTitle:'',
+      movieGenreID:'',
+      movieGenre:'',
+      moviePosterUrl:'',
+      movieSynopsis:'',
       movieDuration: '1h 30min',
-      movieScore: 9,
+      movieScore: null,
       movieYear: 2000,
     }
+  },
+  computed: {
+    id() {
+      return this.$route.params.id
+    },
+  },
+  created() {
+    axios.get('movies/'+this.id )
+        .then(response => {
+         var movie= response.data
+          this.movieTitle=movie.movie_name
+          this.moviePosterUrl=movie.poster_url
+          this.movieScore=movie.rating
+          this.movieSynopsis=movie.synopsis
+
+
+
+          axios.get('genres/'+movie.genre_id )
+              .then(response=>{
+                console.log(response.data)
+                this.movieGenre=response.data.genre
+              }).catch(error => {
+            console.log(error)
+          });
+
+        })
+        .catch(error => {
+          console.log(error)
+        });
+
   },
 }
 </script>
