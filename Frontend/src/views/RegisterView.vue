@@ -1,7 +1,7 @@
 <template>
   <Mainbody>
     <div class="register-wrapper">
-      <form class="register-form" @submit.prevent="hundelSubmit">
+      <form class="register-form" @submit.prevent="hundelRegister">
         <div class="register-form-title">Register</div>
         <b-field label="Username">
           <b-input v-model="Username" required maxlength="24"></b-input>
@@ -40,22 +40,17 @@ export default {
     }
   },
   methods: {
-    hundelSubmit() {
-      const data = {
-        name: this.Username,
-        email: this.Email,
-        pass: this.password,
-      }
+  async  hundelRegister() {
+      const res = await axios
+        .post('register', {
+          name: this.Username,
+          email: this.Email,
+          password: this.password,
+        })
 
-      axios
-        .post('http://127.0.0.1:8000/register', data)
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      console.log(data)
+      localStorage.setItem('token',res.data.token)
+      this.$store.dispatch('user',res.data.user)
+    this.$router.push('/')
     },
   },
 }

@@ -7,6 +7,7 @@ import './service/buefy'
 import './service/icons'
 import './service/axios'
 import './assets/bulma.sass'
+import './service/vuex'
 
 Vue.config.productionTip = false
 

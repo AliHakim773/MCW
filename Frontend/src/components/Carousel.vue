@@ -18,7 +18,7 @@
         <div class="card">
           <div class="card-image">
             <figure class="image is-5by4">
-              <a @click="info(list.id)"><img :src="list.poster_url" /></a>
+              <a v-bind:href="'/movie/' + list.id" v-on:click="goToMoviePage(movie.id)"><img :src="list.poster_url" /></a>
             </figure>
           </div>
           <div class="card-content">
@@ -46,7 +46,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://127.0.0.1:8000/api/movies')
+    axios.get('movies')
         .then(response => {
           if(this.title=="TOP"){
             this.items = response.data.sort((a, b) => b.rating - a.rating);
@@ -61,10 +61,12 @@ export default {
         });
   },
   methods: {
-    info() {
-      this.$router.push('/movie')
-      // this.$router.push('/movie/'+id)
-    },
+    goToMoviePage(id) {
+      // navigate to the movie page using the id
+      // you can use the `this.$router.push` method to push a new route
+      // onto the router's history stack, which will navigate to the movie page
+      this.$router.push({ path: '/movie/' + id })
+    }
   },
 }
 </script>

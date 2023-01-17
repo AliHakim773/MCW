@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'UserInfoLoggedIn',
   data() {
@@ -35,6 +36,7 @@ export default {
     test() {
       console.log('tst')
     },
+    ...mapGetters(['user'])
   },
 }
 </script>

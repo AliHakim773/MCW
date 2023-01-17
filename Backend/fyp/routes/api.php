@@ -41,6 +41,8 @@ Route::apiResources([
     'comments'=> CommentController::class
 ]);
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user',[AuthController::class,'get_current_user']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

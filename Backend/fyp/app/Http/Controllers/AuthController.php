@@ -6,17 +6,26 @@ use App\Models\User;
 use App\Models\UserList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
+
+
+    public function get_current_user(){
+        $user = Auth::user();
+        return $user;
+    }
     public function index()
     {
         return User::all();
     }
     public function register(Request $request){
         $fields = $request->validate([
-            'email'=>'required|string|unique:users,email',
             'name'=>'required|string',
+
+            'email'=>'required|string|unique:users,email',
 
             'password'=>'required'
         ]);
@@ -38,7 +47,7 @@ class AuthController extends Controller
             'token'=>$token
         ];
         return response($response,201);
-
+//test
     }
     public function login(Request $request){
         $fields = $request->validate([

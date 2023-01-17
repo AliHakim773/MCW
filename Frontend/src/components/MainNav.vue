@@ -20,6 +20,9 @@ export default {
       IsLoggedOut: false,
     }
   },
+  computed:{
+
+  }
 }
 </script>
 <style scoped>
