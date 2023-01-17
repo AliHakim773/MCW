@@ -16,6 +16,19 @@
       <div class="search">
         <form>
           <input type="text" placeholder="Search" />
+          <div class="search-result">
+            <ul>
+              <li @click="test">
+                <ListItemSmall :title="movie.title" :status="movie.rate" />
+              </li>
+              <li>
+                <ListItemSmall :title="movie.title" :status="movie.rate" />
+              </li>
+              <li>
+                <ListItemSmall :title="movie.title" :status="movie.rate" />
+              </li>
+            </ul>
+          </div>
         </form>
       </div>
     </nav>
@@ -23,8 +36,26 @@
   </div>
 </template>
 <script>
+import ListItemSmall from './ListItemSmall.vue'
 export default {
   name: 'MainBody',
+  components: {
+    ListItemSmall,
+  },
+  data() {
+    return {
+      moviesList: '',
+      movie: {
+        title: 'yohoo',
+        rate: 3,
+      },
+    }
+  },
+  methods: {
+    test() {
+      console.log('test')
+    },
+  },
 }
 </script>
 <style scoped>
@@ -63,5 +94,26 @@ export default {
   margin-right: 2rem;
   width: 300px;
   border: none;
+  position: relative;
+}
+.search input:focus + .search-result,
+.search-result:hover {
+  display: block;
+}
+.search-result {
+  display: none;
+  position: absolute;
+  background-color: var(--color-white);
+  width: 300px;
+  margin-top: 0.1rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 10px 15px 5px rgb(0 0 0 / 20%);
+}
+.search-result li:not(:last-child):not(:first-child) {
+  padding-bottom: 0.3rem;
+  padding-top: 0.3rem;
+}
+.search-result li:hover {
+  background-color: rgb(0 0 0 / 20%);
 }
 </style>
