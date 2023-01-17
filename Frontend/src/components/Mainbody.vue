@@ -60,6 +60,8 @@ export default {
 .search input {
   border-radius: 1rem;
   padding: 3px 10px;
+  margin-right: 2rem;
+  width: 300px;
   border: none;
 }
 </style>
