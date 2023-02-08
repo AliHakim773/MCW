@@ -29,10 +29,16 @@ const routes = [
       import(/* webpackChunkName: "movie" */ '../views/MovieView.vue'),
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'profile',
     component: () =>
       import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
+  },
+  {
+    path: '/currentprofile',
+    name: 'currentprofile',
+    component: () =>
+        import(/* webpackChunkName: "profile" */ '../views/CurrentProfileView.vue'),
   },
   {
     path: '/friends',
@@ -59,7 +65,7 @@ const routes = [
       import(/* webpackChunkName: "forums" */ '../views/ForumsView.vue'),
   },
   {
-    path: '/forum',
+    path: '/forum/:id/:username/',
     name: 'forum',
     component: () =>
       import(/* webpackChunkName: "forum" */ '../views/ForumView.vue'),

@@ -15,7 +15,8 @@ export default {
     MainNav,
     MainFooter,
     // Mainbody,
-  },
+  }
+
 }
 </script>
 <style>

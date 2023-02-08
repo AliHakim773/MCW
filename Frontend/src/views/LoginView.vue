@@ -33,14 +33,18 @@ export default {
   },
   methods:{
      async hundelLogin() {
-     const res=await axios.post('login', {
-       email: this.Username,
-       password: this.password,
-     })
+       const res = await axios.post('login', {
+         email: this.Username,
+         password: this.password,
+       })
        console.log(res)
-       localStorage.setItem('token',res.data.token)
-      this.$router.push('/')
-    }
+       localStorage.setItem('user', JSON.stringify(this.user))
+
+       localStorage.setItem('token', res.data.token)
+       await this.$store.dispatch('user', res.data.user)
+
+       await this.$router.push('/')
+     }
 
   },
 

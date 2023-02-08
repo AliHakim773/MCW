@@ -27,7 +27,7 @@
           </header>
           <section class="modal-card-body">
             <b-field label="Category Name">
-              <b-input type="Name" :value="Name"> </b-input>
+              <b-input type="Name" v-model="categoryname" :value="Name"> </b-input>
             </b-field>
           </section>
           <footer class="modal-card-foot">
@@ -41,18 +41,55 @@
 </template>
 
 <script>
+import axios from "axios";
+import {mapGetters} from "vuex";
+
 export default {
   name: 'ModalForm',
-  props: ['Name'],
+  props: ['Name','withAdd','movie_id'],
   data() {
     return {
+      categoryname:'',
       isComponentModalActive: false,
     } //TODO(ALiHakim): make isComponentModalActive a global variable
   },
+
+  async created() {
+    const res= await axios.get('user')
+    await this.$store.dispatch('user', res.data)
+  },
+  computed:{
+    ...mapGetters(['user'])
+  },
   methods: {
-    handleCreate() {
+   async handleCreate() {
+
       console.log('added')
+      console.log(this.withAdd)
+     console.log(this.categoryname)
+      if (this.withAdd){
+        const res = await axios.post('userLists', {
+          list_name: this.categoryname,
+          user_id: this.user.id,
+        })
+        console.log(res.data)
+        const res2 = await axios.post('addMovieToList', {
+          user_list_id: res.data,
+          movie_id: this.movie_id,
+        })
+        console.log(res2)
+      }else {
+
+        const res = await axios.post('userLists', {
+          list_name: this.categoryname,
+          user_id: this.user.id,
+        })
+        console.log(res.data)
+
+      }
+
     },
+
   },
 }
 </script>

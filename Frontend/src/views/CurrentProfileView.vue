@@ -26,11 +26,11 @@
       <section class="div-comp profile-details">
         <div class="div-comp-white profile-comp">
           <div class="title">
-            {{ username }} &nbsp; - &nbsp;
+            {{ user.name }} &nbsp; - &nbsp;
 
 
-            <button  v-if="!followed" v-on:click="follow(ids)" class="small-link">Follow</button>
-            <button v-else v-on:click="unfollow(ids)" class="small-link">UnFollow</button>
+            <router-link to="/editprofile" class="small-link"
+              >Edit Profile</router-link>
 
           </div>
           <p class="userDescription">{{ userDescription }}</p>
@@ -135,35 +135,10 @@ export default {
     }
   },
   computed:{
-    id() {
-      return this.$route.params.id
-    },
     ...mapGetters(['user'])
   },
   created() {
-    axios.get("isFollowed/"+this.id+"/"+this.user.id).then(response=>{
-      this.followed=response.data
-    }).catch(error=>{
-      console.log(error)
-    })
-    axios.get("followers/"+this.id).then(response=>{
-      this.followersList=response.data
-    }).catch(error=>{
-      console.log(error)
-    })
-    axios.get('users/'+this.id )
-        .then(response => {
-
-          const user = response.data;
-          this.ids=this.id
-          this.username=user.name
-          console.log(response)
-
-        })
-        .catch(error => {
-          console.log(error)
-        });
-
+    console.log(this.user)
   },
   methods:{
     async follow(id){

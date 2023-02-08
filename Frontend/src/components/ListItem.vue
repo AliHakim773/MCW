@@ -2,35 +2,46 @@
   <div class="list-item">
     <div class="list-cell" style="width: 5%">{{ number }}</div>
     <div class="list-cell list-cell-img" style="width: 10%">
-      <img src="../../public/Lissa.png" class="list-img" :alt="title" />
+      <img :src="img" class="list-img" :alt="title" />
     </div>
     <div class="list-cell list-cell-title" style="width: 50%">{{ title }}</div>
-    <div class="list-cell" style="width: 15%">
-      <b-field>
-        <b-select placeholder="Select a Category" class="list-category-select">
-          <option v-for="option in data" :value="option.id" :key="option.id">
-            {{ option.name }}
-          </option>
-        </b-select>
-      </b-field>
-    </div>
+<!--    <div class="list-cell" style="width: 15%">-->
+<!--      <b-field>-->
+<!--        <b-select placeholder="Select a Category" class="list-category-select">-->
+<!--          <option v-for="option in data" :value="option.id" :key="option.id">-->
+<!--            {{ option.name }}-->
+<!--          </option>-->
+<!--        </b-select>-->
+<!--      </b-field>-->
+<!--    </div>-->
     <div class="list-cell" style="width: 10%">{{ score }}</div>
     <div class="list-cell" style="width: 10%">
       <font-awesome-icon
         icon="fa-solid fa-trash-can"
         class="delete-item"
-        @click="test()"
+        @click="del()"
+
       />
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: 'ListItem',
-  props: ['number', 'title', 'score'],
+  props: ['number', 'title', 'score','img','selectedListId','movie_id'],
   methods: {
-    test() {
+   async del() {
       console.log('test')
+     console.log(this.selectedListId)
+     console.log(this.movie_id)
+      const res = await axios.post('removeMovieFromList', {
+        user_list_id: this.selectedListId,
+        movie_id: this.movie_id,
+      })
+     this.$emit('categorySelected', this.selectedListId )
+      console.log(res)
     },
   },
 }

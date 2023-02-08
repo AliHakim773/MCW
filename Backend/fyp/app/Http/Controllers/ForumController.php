@@ -14,7 +14,9 @@ class ForumController extends Controller
      */
     public function index()
     {
-        return Forum::all();
+        $forums = Forum::with('User')->get();
+        return $forums  ;
+
     }
 
     /**

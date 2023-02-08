@@ -1,13 +1,15 @@
 <template>
   <nav class="main-nav">
     <router-link class="logo" to="/">MCW</router-link>
-    <UserInfoLoggedOutVue v-if="IsLoggedOut" />
-    <UserInfoLoggedInVue v-else />
+    <UserInfoLoggedInVue v-if="user" />
+    <UserInfoLoggedOutVue v-else />
   </nav>
 </template>
 <script>
 import UserInfoLoggedInVue from './UserInfoLoggedIn.vue'
 import UserInfoLoggedOutVue from './UserInfoLoggedOut.vue'
+import {mapGetters} from 'vuex';
+import axios from "axios";
 
 export default {
   name: 'MainNav',
@@ -20,9 +22,15 @@ export default {
       IsLoggedOut: false,
     }
   },
+  async created() {
+    const res= await axios.get('user')
+    await this.$store.dispatch('user', res.data)
+  },
   computed:{
+      ...mapGetters(['user'])
+    }
 
-  }
+
 }
 </script>
 <style scoped>

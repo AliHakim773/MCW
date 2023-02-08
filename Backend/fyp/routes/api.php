@@ -29,7 +29,9 @@ use App\Http\Controllers\ForumController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/users', [AuthController::class, 'index']);
+Route::get('/users/{id}', [AuthController::class, 'show']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/updateProfileImage', [AuthController::class, 'updateProfileImage']);
 Route::apiResources([
     'movies' => MovieController::class,
     'roles' => RoleController::class,
@@ -40,8 +42,9 @@ Route::apiResources([
     'forums'=> ForumController::class,
     'comments'=> CommentController::class
 ]);
+Route::get('user',[AuthController::class,'get_current_user']);
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('user',[AuthController::class,'get_current_user']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
@@ -49,7 +52,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('addMovieToList', function (Request $request) {
+    Route::post('addMovieToList', function (Request $request) {
+    $request->validate([
+        'user_list_id' => 'required|integer',
+        'movie_id' => 'required|integer',
+        'user_id'=>'required|integer'
+    ]);
+    $function_utilities = new FunctionsUtilities;
+    $user_list_id = $request->user_list_id;
+    $movie_id = $request->movie_id;
+    $user_id=$request->user_id;
+
+    $function_utilities->Store_movie_to_list($user_list_id, $movie_id,$user_id);
+
+});
+Route::post('removeMovieFromList', function (Request $request) {
     $request->validate([
         'user_list_id' => 'required|integer',
         'movie_id' => 'required|integer'
@@ -58,8 +75,36 @@ Route::post('addMovieToList', function (Request $request) {
     $user_list_id = $request->user_list_id;
     $movie_id = $request->movie_id;
 
-    $function_utilities->Store_movie_to_list($user_list_id, $movie_id);
-});
+    $function_utilities->Remove_movie_from_list($user_list_id, $movie_id);
 
+});
+Route::post('followUser', function (Request $request) {
+    $request->validate([
+        'user_id' => 'required|integer',
+        'followed_user_id' => 'required|integer'
+    ]);
+    $function_utilities = new FunctionsUtilities;
+    $user_id = $request->user_id;
+    $followed_user_id = $request->followed_user_id;
+
+    $function_utilities->followFriend($user_id, $followed_user_id);
+});
+Route::post('unfollowUser', function (Request $request) {
+    $request->validate([
+        'user_id' => 'required|integer',
+        'followed_user_id' => 'required|integer'
+    ]);
+    $function_utilities = new FunctionsUtilities;
+    $user_id = $request->user_id;
+    $followed_user_id = $request->followed_user_id;
+
+    $function_utilities->unfollow($user_id, $followed_user_id);
+});
+Route::get('/isFollowed/{user_id}/{followed_user_id}', [FunctionsUtilities::class, 'isFollowed']);
+Route::get('/followers/{user_id}', [FunctionsUtilities::class, 'getFollowers']);
+Route::get('/userlistsOfUser/{user_id}', [FunctionsUtilities::class, 'get_user_lists_of_user']);
 Route::get('/moviesInList/{user_list_id}', [FunctionsUtilities::class, 'movies_in_list']);
+Route::get('/getAvgRating/{movie_id}', [MovieController::class, 'getAvgRating']);
+
+
 Route::get('/listsOfUser/{user_id}', [FunctionsUtilities::class, 'get_user_lists']);

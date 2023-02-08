@@ -1,12 +1,13 @@
 <template>
   <div :class="border ? 'border-forum forum-body' : 'forum-body'">
-    <div class="forums-figure" @click="goToUser">
+    <div class="forums-figure" @click="goToUser(userid)">
       <div class="forums-credit">By: {{ UserName }}</div>
+      <div class="forums-credit">By: {{ userid }}</div>
       <div class="forums-date">{{ submitDate }}</div>
       <!-- <img src="../../public/Lissa.png" class="forum-img" /> -->
     </div>
     <div class="forum-information">
-      <div class="forum-title" @click="goToForum">{{ title }}</div>
+      <div class="forum-title" @click="goToForum(forumid,UserName)">{{ title }}</div>
       <div class="forum-content">
         {{ content }}
       </div>
@@ -16,13 +17,16 @@
 <script>
 export default {
   name: 'ForumsComponent',
-  props: ['UserName', 'submitDate', 'ImgUrl', 'title', 'content', 'border'],
+  props: ['UserName', 'submitDate', 'ImgUrl', 'title', 'content','userid','forumid', 'border'],
   methods: {
-    goToForum() {
-      this.$router.push('/forum')
+    goToForum(forumid,user_name) {
+      this.$router.push({ path: '/forum/' + forumid+'/' +user_name })
+      console.log(forumid)
+      console.log(user_name)
     },
-    goToUser() {
-      console.log('User')
+    goToUser(user_id) {
+      this.$router.push({ path: '/profile/' + user_id })
+
     },
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <Mainbody>
     <main>
-      <form action="">
+      <form @submit.prevent="updateProfileImage">
         <div class="grid-container">
           <div class="grid-item grid-item-1">User Name</div>
           <div class="grid-item grid-item-2">
@@ -21,7 +21,7 @@
           </div>
           <div class="grid-item grid-item-1">Image</div>
           <div class="grid-item grid-item-2">
-            <input type="file" />
+            <input type="file" @change="uploadImage" />
           </div>
           <div class="grid-item grid-item-1">
             <input type="submit" value="Submit" />
@@ -33,12 +33,43 @@
 </template>
 <script>
 import Mainbody from '@/components/Mainbody.vue'
+import {mapGetters} from "vuex";
+import axios from "axios";
 
 export default {
   name: 'EditProfileView',
   components: {
     Mainbody,
   },
+  data(){
+    return{
+    image:null,
+    }
+  },methods:{
+    uploadImage(event){
+      console.log(event.target.files[0])
+      this.image = event.target.files[0];
+    },updateProfileImage() {
+      let formData = new FormData();
+      formData.append('image', this.image);
+      console.log(formData)
+      axios.post('/api/updateProfileImage', formData)
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    },
+  },
+  async created(){
+
+    console.log(this.user)
+  },
+
+  computed:{
+    ...mapGetters(['user'])
+  }
 }
 </script>
 <style scoped>
