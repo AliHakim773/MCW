@@ -1,9 +1,7 @@
 <template>
   <Mainbody>
     <div class="home-wrapper">
-
       <main class="main-home">
-
         <Carousel class="carousel" :title="title" :link="link" />
         <Carousel class="carousel" :title="title2" :link="link" />
         <TopForums />
@@ -65,7 +63,7 @@ export default {
   },
   data() {
     return {
-      user:null,
+      user: null,
       title: 'TOP',
       title2: 'RECENT',
       link: '/register',
@@ -118,7 +116,6 @@ export default {
       date: 'sometime',
     }
   },
-
 }
 </script>
 <style scoped>
