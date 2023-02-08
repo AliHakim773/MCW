@@ -50,7 +50,7 @@ export default {
 
       localStorage.setItem('token',res.data.token)
       this.$store.dispatch('user',res.data.user)
-    this.$router.push('/')
+      await this.$router.push('/')
     },
   },
 }

@@ -37,7 +37,6 @@
 <script>
 import axios from 'axios';
 export default {
-
   name: 'CarouselMovie',
   props: ['title', 'link'],
   data() {
@@ -53,8 +52,6 @@ export default {
           }else{
             this.items = response.data.sort((a, b) => b.created_at - a.created_at);
           }
-
-          console.log(this.items)
         })
         .catch(error => {
           console.log(error)
@@ -62,14 +59,14 @@ export default {
   },
   methods: {
     goToMoviePage(id) {
-      // navigate to the movie page using the id
-      // you can use the `this.$router.push` method to push a new route
-      // onto the router's history stack, which will navigate to the movie page
       this.$router.push({ path: '/movie/' + id })
     }
   },
 }
 </script>
+
+
+
 <style scoped>
 .carousel-movie {
   background-color: var(--secondary-bg-color);

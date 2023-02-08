@@ -19,12 +19,14 @@
           <div class="title score">Score: {{ movieScore }} | 10</div>
         </div>
         <div class="dropdown-group">
-          <Categories :List="ListCategory" />
+          <Categories :List="ListCategory" :movie_id="id" :withAdd="true" :type="typeadd" />
 
           <Dropdown
             class="dropdown-item"
             :list="ListRatings"
             :category="false"
+            :movie_id="id"
+            :type="typerate"
             placeholder="Select a Rating"
           ></Dropdown>
         </div>
@@ -44,7 +46,7 @@ import Dropdown from '@/components/Dropdown.vue'
 import Categories from '@/components/Categories.vue'
 import Aside from '@/components/Aside.vue'
 import axios from "axios";
-
+import {mapGetters} from "vuex";
 export default {
   name: 'MovieView',
   components: {
@@ -55,18 +57,21 @@ export default {
   },
   data() {
     return {
+      typerate:"rate",
+      typeadd:"addmovietocat",
+      userid:1,
       ListCategory: [],
       ListRatings: [
-        { id: 1, listName: '1' },
-        { id: 2, listName: '2' },
-        { id: 3, listName: '3' },
-        { id: 4, listName: '4' },
-        { id: 5, listName: '5' },
-        { id: 6, listName: '6' },
-        { id: 7, listName: '7' },
-        { id: 8, listName: '8' },
-        { id: 9, listName: '9' },
-        { id: 10, listName: '10' },
+        { id: 1, list_name: '1' },
+        { id: 2, list_name: '2' },
+        { id: 3, list_name: '3' },
+        { id: 4, list_name: '4' },
+        { id: 5, list_name: '5' },
+        { id: 6, list_name: '6' },
+        { id: 7, list_name: '7' },
+        { id: 8, list_name: '8' },
+        { id: 9, list_name: '9' },
+        { id: 10, list_name: '10' },
       ],
       movieTitle:'',
       movieGenreID:'',
@@ -78,18 +83,23 @@ export default {
       movieYear: 2000,
     }
   },
-  computed: {
-    id() {
-      return this.$route.params.id
-    },
+  methods:{
+
   },
-  created() {
+
+  async created() {
+     const res= await axios.get('user')
+     await this.$store.dispatch('user', res.data)
+  axios.get('getAvgRating/'+this.id).then(res=>{
+    console.log({"rating":res.data})
+    this.movieScore=res.data
+  })
+
     axios.get('movies/'+this.id )
         .then(response => {
          var movie= response.data
           this.movieTitle=movie.movie_name
           this.moviePosterUrl=movie.poster_url
-          this.movieScore=movie.rating
           this.movieSynopsis=movie.synopsis
 
 
@@ -106,8 +116,26 @@ export default {
         .catch(error => {
           console.log(error)
         });
+    console.log(this.user.id)
+    axios.get('userlistsOfUser/'+this.user.id).then(response=>{
+      this.ListCategory=response.data
+
+
+      console.log(response.data)
+    }).catch(error=>{
+      console.log(error)
+    })
 
   },
+  computed: {
+      id() {
+      return this.$route.params.id
+    },
+    ...mapGetters(['user'])
+
+
+  }
+  ,
 }
 </script>
 <style scoped>

@@ -51,7 +51,7 @@ import Carousel from '@/components/Carousel.vue'
 import ListItemSmall from '@/components/ListItemSmall.vue'
 import ReviewSmall from '@/components/ReviewSmall.vue'
 import Mainbody from '@/components/Mainbody.vue'
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   name: 'HomeView',
   components: {
@@ -115,11 +115,6 @@ export default {
       status: 'Status',
       date: 'sometime',
     }
-  },
-  async created() {
-    const res = await axios.get('user')
-    console.log(res)
-    this.user = res.data
   },
 }
 </script>

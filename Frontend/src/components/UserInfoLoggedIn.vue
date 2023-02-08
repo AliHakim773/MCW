@@ -1,25 +1,26 @@
 <template>
   <div class="user-info-container">
     <div class="user-name" tabindex="0">
-      {{ userName }} <font-awesome-icon icon="fa-solid fa-angle-down" />
+      {{ user.name }} <font-awesome-icon icon="fa-solid fa-angle-down" />
       <div class="user-settings">
         <ul role="list">
           <li>
-            <a @click="test" href="http://localhost:8080/Profile">Profile</a>
+            <a @click="go_to_profile(user.id)" >Profile</a>
             <!-- TODO(ALIHakim):fix the frop down -->
           </li>
           <li>List</li>
-          <li>Logout</li>
+          <li @click.prevent="logout">Logout</li>
         </ul>
       </div>
     </div>
     <div class="user-image">
-      <img src="../../public/Lissa.png" alt="PFP" />
+      <img @click="go_to_profile()" src="../../public/Lissa.png" alt="PFP" />
     </div>
   </div>
 </template>
 <script>
 import {mapGetters} from 'vuex'
+import axios from "axios";
 export default {
   name: 'UserInfoLoggedIn',
   data() {
@@ -29,15 +30,34 @@ export default {
       hidden: true,
     }
   },
+
   methods: {
-    // toggleHidden() {
-    //   this.hidden = !this.hidden
-    // },
-    test() {
-      console.log('tst')
+    go_to_profile(){
+        // Push the router to /profile
+        this.$router.push({ path: '/currentprofile' })
+
     },
+    logout(){
+      axios.post('logout') .then(response => {
+       console.log(response)
+      })
+          .catch(error => {
+            console.log(error);
+          });
+      localStorage.removeItem('token')
+      try {
+        this.$router.push('/')
+        location.reload()
+
+      }catch (error){
+        console.log(error)
+        location.reload()
+
+      }
+    }
+  },computed:{
     ...mapGetters(['user'])
-  },
+  }
 }
 </script>
 <style scoped>

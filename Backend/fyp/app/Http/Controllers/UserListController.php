@@ -29,7 +29,9 @@ class UserListController extends Controller
             'list_name'=>'required|string',
             'user_id'=>'required|integer'
         ]);
-        return UserList::create($request->all());
+          $list=  UserList::create($request->all());
+        return  $list->id;
+
     }
 
     /**

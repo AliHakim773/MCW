@@ -3,19 +3,18 @@
     <nav class="site-nav-container">
       <div class="site-nav">
         <router-link class="site-nav-link" to="/">Home</router-link>
-        <router-link class="site-nav-link" to="/login">login</router-link>
-        <router-link class="site-nav-link" to="/register">Register</router-link>
-        <router-link class="site-nav-link" to="/Movie">Movie</router-link>
-        <router-link class="site-nav-link" to="/Profile">Profile</router-link>
+<!--        <router-link class="site-nav-link" to="/login">login</router-link>-->
+<!--        <router-link class="site-nav-link" to="/register">Register</router-link>-->
+<!--        <router-link class="site-nav-link" to="/Movie">Movie</router-link>-->
+<!--        <router-link class="site-nav-link" to="/Profile">Profile</router-link>-->
         <router-link class="site-nav-link" to="/list">List</router-link>
         <router-link class="site-nav-link" to="/forums">Forums</router-link>
-        <router-link class="site-nav-link" to="/topmovies"
-          >Top Movies</router-link
+        <router-link class="site-nav-link" to="/topmovies">Top Movies</router-link
         >
       </div>
       <div class="search">
         <form>
-          <input type="text" placeholder="Search" />
+          <input type="text"  placeholder="Search" />
           <div class="search-result">
             <ul>
               <li @click="test">
