@@ -1,4 +1,4 @@
-<template>
+  <template>
   <section>
     <span class="create-forums-btn" @click="isComponentModalActive = true">
       Create Forum
@@ -18,7 +18,7 @@
       <form action="">
         <div class="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title">Create a Category</p>
+            <p class="modal-card-title">Create Forum</p>
             <button
               type="button"
               class="delete"
@@ -27,10 +27,10 @@
           </header>
           <section class="modal-card-body">
             <b-field label="Title">
-              <b-input type="Title"> </b-input>
+              <b-input v-model="title" type="Title"> </b-input>
             </b-field>
             <b-field label="Body">
-              <b-input type="textarea"> </b-input>
+              <b-input v-model="content " type="textarea"> </b-input>
             </b-field>
           </section>
           <footer class="modal-card-foot">
@@ -43,18 +43,34 @@
   </section>
 </template>
 <script>
+import axios from "axios";
+import {mapGetters} from "vuex";
+
 export default {
   name: 'ForumModel',
   data() {
     return {
       isComponentModalActive: false,
+      title:'',
+      content:'',
     }
   },
   methods: {
-    handleCreate() {
+   async handleCreate() {
       console.log('added')
-    },
+      const res = await axios.post('forums', {
+        user_id:this.user.id,
+        title: this.title,
+        content: this.content,
+      })
+     this.isComponentModalActive=false
+     console.log(res)
+
+   },
   },
+  computed:{
+    ...mapGetters(['user'])
+  }
 }
 </script>
 <style scoped>

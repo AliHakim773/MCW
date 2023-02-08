@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Rate;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -61,6 +62,14 @@ class MovieController extends Controller
 
          $movie->update($request->all());
         return $request;
+
+    }
+    public function getAvgRating($id)
+    {
+        $averageRating = Rate::where('movie_id', $id)
+            ->avg('rating');
+
+        return $averageRating;
 
     }
 
