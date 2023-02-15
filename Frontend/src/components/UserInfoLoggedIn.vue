@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="user-image">
-      <img @click="go_to_profile()" src="../../public/Lissa.png" alt="PFP" />
+      <img @click="go_to_profile()" :src=img alt="PFP" />
     </div>
   </div>
 </template>
@@ -26,11 +26,14 @@ export default {
   data() {
     return {
       userName: 'User Name',
-      img: '../../public/Lissa.png',
+      img: '',
       hidden: true,
     }
   },
+created() {
+this.img="/"+this.user.image
 
+    },
   methods: {
     go_to_profile(){
         // Push the router to /profile

@@ -14,20 +14,56 @@
       </div>
       <div class="search">
         <form>
-          <input type="text"  placeholder="Search" />
-          <div class="search-result">
-            <ul>
-              <li @click="test">
-                <ListItemSmall :title="movie.title" :status="movie.rate" />
-              </li>
-              <li>
-                <ListItemSmall :title="movie.title" :status="movie.rate" />
-              </li>
-              <li>
-                <ListItemSmall :title="movie.title" :status="movie.rate" />
-              </li>
-            </ul>
-          </div>
+          <b-field label="Find a user">
+            <b-autocomplete
+                :data="data"
+                placeholder="e.g. AliMr"
+                field="title"
+                :loading="isFetching"
+                @typing="getAsyncData"
+                @select="option => onSelect(option)">
+
+              <template slot-scope="props">
+                <div class="media">
+                  <div class="media-left">
+                    <img width="32" src="../../public/Lissa.png">
+                  </div>
+                  <div class="media-content">
+                    {{ props.option.name }}
+                    <br>
+
+                  </div>
+                </div>
+              </template>
+            </b-autocomplete>
+          </b-field>
+        </form>
+      </div>
+      <div class="search">
+        <form>
+          <b-field label="Find a movie">
+            <b-autocomplete
+                :data="MovieData"
+                placeholder="e.g. Avatar"
+                field="title"
+                :loading="isFetchingM"
+                @typing="getAsyncMovies"
+                @select="option => onSelect(option)">
+
+              <template slot-scope="props">
+                <div class="media">
+                  <div class="media-left">
+                    <img width="32" :src="props.option.poster_url">
+                  </div>
+                  <div class="media-content">
+                    {{ props.option.movie_name }}
+                    <br>
+
+                  </div>
+                </div>
+              </template>
+            </b-autocomplete>
+          </b-field>
         </form>
       </div>
     </nav>
@@ -35,14 +71,20 @@
   </div>
 </template>
 <script>
-import ListItemSmall from './ListItemSmall.vue'
+import {debounce} from "lodash";
+import axios from "axios";
+
 export default {
   name: 'MainBody',
-  components: {
-    ListItemSmall,
-  },
+  components: {},
   data() {
     return {
+      MovieData:[],
+      isFetchingM: false,
+
+      data: [],
+      selected: null,
+      isFetching: false,
       moviesList: '',
       movie: {
         title: 'yohoo',
@@ -51,9 +93,57 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log('test')
+    onSelect(option) {
+      console.log(option.id);
+      this.$router.push({ path: '/profile/' + option.id })
+
     },
+    test(id) {
+      console.log(id)
+    },
+    getAsyncData: debounce(function (name) {
+      if (!name.length) {
+        this.data = []
+        return
+      }
+
+      this.isFetching = true
+      axios.get(`get_users_by_letter/${name}`)
+          .then(response => {
+            this.data = response.data
+            console.log(response.data)
+          })
+          .catch((error) => {
+            this.data = []
+            console.log(error)
+          })
+          .finally(() => {
+            this.isFetching = false
+          })
+    }, 500) ,
+    getAsyncMovies: debounce(function (name) {
+      if (!name.length) {
+        this.data = []
+        return
+      }
+
+      this.isFetchingM = true
+      axios.get(`get_movies_by_letter/${name}`)
+          .then(response => {
+            this.MovieData = response.data
+            console.log(response.data)
+          })
+          .catch((error) => {
+            this.MovieData = []
+            console.log(error)
+          })
+          .finally(() => {
+            this.isFetchingM = false
+          })
+    }, 500)
+
+
+
   },
 }
 </script>

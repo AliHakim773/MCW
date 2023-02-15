@@ -1,8 +1,7 @@
 <template>
   <Mainbody>
     <div class="profile-main">
-      <Aside
-        ><div class="div-comp-white profile-info-aside">
+      <Aside :imgLink="image"><div class="div-comp-white profile-info-aside">
           <div class="profile-aside-info-user">
             <div class="title">Information</div>
             <div>Age: 18</div>
@@ -18,7 +17,7 @@
           </div>
           <div class="followed-users">
             <h1 v-for="usera in followersList" v-bind:key="usera.index"> {{usera.name}}/</h1>
-
+            <figure v-for="usera in followersList" v-bind:key="usera.index"><img class="list-img"   src="../../public/Lissa.png" /></figure>
 
           </div>
         </div>
@@ -81,6 +80,7 @@ export default {
       username: '',
       followed:false,
       ids:null,
+      image:'',
       followersList:[],
       userDescription:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, dolorem nisi. Dolores, asperiores corporis! Architecto, deleniti facilis quod nemo porro sit, vel laboriosam ab incidunt beatae, voluptatum temporibus aspernatur corporis.',
@@ -148,6 +148,7 @@ export default {
     })
     axios.get("followers/"+this.id).then(response=>{
       this.followersList=response.data
+      console.log({"followers":response.data})
     }).catch(error=>{
       console.log(error)
     })
@@ -155,6 +156,8 @@ export default {
         .then(response => {
 
           const user = response.data;
+          this.image="/"+user.image
+
           this.ids=this.id
           this.username=user.name
           console.log(response)

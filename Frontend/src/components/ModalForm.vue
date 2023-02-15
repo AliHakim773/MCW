@@ -72,10 +72,12 @@ export default {
           list_name: this.categoryname,
           user_id: this.user.id,
         })
-        console.log(res.data)
+        const catId=res.data
+        console.log({"res.data":catId})
         const res2 = await axios.post('addMovieToList', {
-          user_list_id: res.data,
+          user_list_id: catId,
           movie_id: this.movie_id,
+          user_id:this.user.id
         })
         console.log(res2)
       }else {
