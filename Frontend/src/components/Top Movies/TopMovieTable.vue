@@ -4,16 +4,17 @@
       <th class="t-rank">Rank</th>
       <th class="t-name">Movie</th>
       <th class="t-score">Your Score</th>
-      <th class="t-score">{{ movies[0].name }}</th>
+      <th class="t-score">Average Score</th>
     </tr>
     <TableRow
       v-for="(m, index) in movies"
       :key="index"
       :rank="index + 1"
-      :name="m.name"
-      :imgSrc="m.imgSrc"
-      :avgScore="m.avgScore"
-      :userScore="m.userScore"
+      :name="m.movie_name"
+      :imgSrc="m.poster_url"
+      :avgScore="m.rating"
+      :id="m.id"
+
     />
   </table>
 </template>

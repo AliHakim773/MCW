@@ -1,6 +1,6 @@
 <template>
   <div class="review-small">
-    <figure><img class="review-img" src="../../public/Lissa.png" /></figure>
+    <figure><img class="review-img" :src="imgLink" /></figure>
     <div class="review-details">
       <div class="review-title-rating">
         <span class="review-title">{{ title }}</span>
@@ -14,6 +14,11 @@
 <script>
 export default {
   name: 'ReviewSmall',
+  data(){
+    return{
+
+    }
+  },
   props: ['title', 'status', 'rating', 'content', 'imgLink'],
   computed: {
     checkedcontent() {
@@ -22,6 +27,9 @@ export default {
       else return this.content
     },
   },
+  created() {
+
+  }
 }
 
 function removeLastWord(str) {

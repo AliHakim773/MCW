@@ -1,15 +1,14 @@
 <template>
   <div>
     <header class="list-header">
-      <router-link to="/profile">{{ Name }}
-      </router-link
-      >
+      <h1>{{ user.name }}
+      </h1>
       's List
     </header>
     <div class="div-comp-white list">
       <header>
         <div class="category">
-          <div class="current-list-title">{{ CurrentList }}</div>
+          <div class="current-list-title">{{ CurrentList.list_name }} <button v-if="CurrentList.list_name!=='All'" @click="deleteCategory(CurrentList.id)"> delete</button></div>
           <Categories :list="ListCategory" :withAdd="false" :type="typeselect"
                       @categorySelected="handleCategorySelected"/>
         </div>
@@ -56,36 +55,55 @@ export default {
       typeselect: 'select',
       selecetedListId: null,
       Name: 'BlackSea',
+
       ListCategory: [],
-      CurrentList: 'Current List Name',
+      CurrentList: '',
       movies: [],
+      allListId:null,
     }
   },
   methods: {
+   async deleteCategory(id){
+    await  axios.delete('userLists/'+id).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.log(error)
+      })
+     await this.handleCategorySelected(this.allListId)
+      await this.loadUserLists()
+    },
+   async loadUserLists(){
+      const res2 = await axios.get('userlistsOfUser/' + this.user.id)
+      this.ListCategory = res2.data
+   },
+
     async handleCategorySelected(id) {
       this.selecetedListId = id;
       const res = await axios.get('moviesInList/' + id)
       const movies = res.data.flatMap(item => item.movies);
-      this.movies = movies
+      const promises = movies.map(movie => {
+        return axios.get('getAvgRating/' + movie.id)
+            .then(res => {
+              movie.rating = res.data;
+              return movie;
+            });
+      });
+      Promise.all(promises).then(sortedMovies => {
+        this.movies = sortedMovies.sort((a, b) => b.rating - a.rating);
+      });
       const res2 = await axios.get('userLists/' + id)
-      this.CurrentList = res2.data.list_name
+      this.CurrentList = res2.data
     }
   },
   async created() {
-    //add this when find the all list of every user
-    // const res= await axios.get('moviesInList/'+id)
-    // console.log(res.data)
-    // const movies = res.data.flatMap(item => item.movies);
-    // this.movies=movies
-    // console.log(movies)
-    // const res2= await axios.get('userLists/'+id)
-    // this.CurrentList=res2.data.list_name
-    //
+
+    const alllist = await axios.get('get_allList/'+this.user.id)
+    await this.handleCategorySelected(alllist.data.id)
+    this.allListId=alllist.data.id
     const res = await axios.get('user')
     await this.$store.dispatch('user', res.data)
+   await this.loadUserLists()
 
-    const res2 = await axios.get('userlistsOfUser/' + this.user.id)
-    this.ListCategory = res2.data
     // axios.get('userlistsOfUser/'+this.user.id).then(response=>{
     //   this.ListCategory=response.data
     //
@@ -100,7 +118,6 @@ export default {
     ...mapGetters(['user'])
   },
   mounted() {
-    this.handleCategorySelected()
   }
 
 }

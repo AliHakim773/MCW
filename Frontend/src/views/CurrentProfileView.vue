@@ -1,8 +1,7 @@
 <template>
   <Mainbody>
     <div class="profile-main">
-      <Aside
-        ><div class="div-comp-white profile-info-aside">
+      <Aside :imgLink="userimage"><div class="div-comp-white profile-info-aside">
           <div class="profile-aside-info-user">
             <div class="title">Information</div>
             <div>Age: 18</div>
@@ -78,6 +77,8 @@ export default {
   },
   data() {
     return {
+      userimage:'',
+      userimage1:"/Lissa.png",
       username: '',
       followed:false,
       ids:null,
@@ -139,39 +140,10 @@ export default {
   },
   created() {
     console.log(this.user)
+    console.log(this.user.image)
+    this.userimage="/"+this.user.image
   },
   methods:{
-    async follow(id){
-      if(this.followed){
-        this.followed=false
-      }else{
-        this.followed=true
-      }
-      const res = await axios.post('followUser', {
-        user_id:id ,
-        followed_user_id:this.user.id ,
-      })
-      console.log("follow")
-
-      console.log(id)
-     console.log(this.user.id)
-     console.log(res)
-    },
-    async unfollow(id){
-      if(this.followed){
-        this.followed=false
-      }else{
-        this.followed=true
-      }
-      const res = await axios.post('unfollowUser', {
-        user_id:this.user.id  ,
-        followed_user_id:id,
-      })
-      console.log("unfollow")
-      console.log(id)
-      console.log(this.user.id)
-      console.log(res)
-    }
   }
 }
 </script>

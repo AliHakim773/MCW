@@ -7,6 +7,31 @@ use App\Models\UserList;
 
 class FunctionsUtilities
 {
+
+    public function uploadImage(Request $request)
+    {try {
+        $user_id = $request->user_id;
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found']);
+        }
+
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->extension();
+        $image->storeAs('public/images',$imageName);
+
+        $user->image = $imageName;
+        $user->save();
+
+        return response()->json(['success' => 'Image uploaded successfully']);
+    } catch (\Exception $e) {
+        \Log::error($e);
+        return response()->json(['error' => 'An error occurred while uploading the image']);
+    }
+
+    }
+
         function Store_movie_to_list($user_list_id, $movie_id,$userId)
         {
             $list = UserList::where('user_id', $userId)
@@ -29,6 +54,8 @@ class FunctionsUtilities
             }
             return false;
         }
+
+
         function Remove_movie_from_list($user_list_id, $movie_id)
          {
             $userList = UserList::find($user_list_id);
@@ -54,6 +81,18 @@ class FunctionsUtilities
 
         function get_user_lists($user_id){
             return User::where('id',$user_id)->with('userLists')->get();
+        }
+        function get_users_by_letter($letter){
+
+            $users = User::where('name', 'LIKE', '%'.$letter.'%')->get();
+
+            return $users;
+        }
+        function get_movies_by_letter($letter){
+
+            $movies = Movie::where('movie_name', 'LIKE', '%'.$letter.'%')->get();
+
+            return $movies;
         }
 
         function get_user_lists_of_user($user_id){

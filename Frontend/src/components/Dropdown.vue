@@ -18,7 +18,7 @@
 import axios from "axios";
 import {mapGetters} from "vuex";
 
-export default {
+export default  {
   name: 'DropDown',
   props: ['list', 'category', 'placeholder','movie_id','type'],
   computed: {

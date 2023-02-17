@@ -1,24 +1,29 @@
 <template>
   <Mainbody>
     <main>
-      <form @submit.prevent="updateProfileImage">
+      <form @submit.prevent="hundelUpdate">
         <div class="grid-container">
           <div class="grid-item grid-item-1">User Name</div>
           <div class="grid-item grid-item-2">
-            <input type="text" />
+            <input type="text" v-model="userdata.name"/>
           </div>
           <div class="grid-item grid-item-1">Age</div>
           <div class="grid-item grid-item-2">
             <input type="number" />
           </div>
-          <div class="grid-item grid-item-1">Location</div>
+          <div class="grid-item grid-item-1">Email (read only!)</div>
           <div class="grid-item grid-item-2">
-            <input type="text" />
+            <input type="text"  v-model="userdata.email" readonly />
           </div>
           <div class="grid-item grid-item-1">Description</div>
           <div class="grid-item grid-item-2">
             <textarea />
           </div>
+          <form @submit.prevent="uploadImage">
+            <input type="file" @change="setImage"/>
+            <button type="submit">Upload Image</button>
+          </form>
+          <img :src="imagePreview"/>
           <div class="grid-item grid-item-1">Image</div>
           <div class="grid-item grid-item-2">
             <input type="file" @change="uploadImage" />
@@ -43,13 +48,66 @@ export default {
   },
   data(){
     return{
-    image:null,
+      imagePreview:'',
+      userdata:null,
+      image:null,
     }
   },methods:{
-    uploadImage(event){
-      console.log(event.target.files[0])
-      this.image = event.target.files[0];
-    },updateProfileImage() {
+    setImage(event) {
+      this.image = event.target.files[0]
+    },
+    async uploadImage() {
+      const formData = new FormData()
+      formData.append('image', this.image)
+      formData.append('user_id', this.user.id)
+      console.log(this.image)
+      console.log(this.user.id)
+      try {
+        const response = await axios.post('upload_image', formData)
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    previewImage(event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imagePreview = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    async hundelUpdate() {
+      await axios.put('users/'+this.user.id, {
+        email: this.userdata.email,
+        name:this.userdata.name,
+      })
+    },
+    // async uploadImage() {
+    //   const input = this.$refs.fileInput;
+    //   if (input.files && input.files[0]) {
+    //     const file = input.files[0];
+    //     const formData = new FormData();
+    //     formData.append('image', file);
+    //
+    //     try {
+    //       // make a server request to save the image in your Vue project
+    //       // and to save the image path or name in the database
+    //       const response = await axios.post('/api/upload-image', formData);
+    //       console.log(response.data);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   }
+    // },
+    // uploadImage(event){
+    //   console.log(this.userdata.id)
+    //   console.log(event.target.files[0])
+    //   this.image = event.target.files[0];
+    // },
+    updateProfileImage() {
       let formData = new FormData();
       formData.append('image', this.image);
       console.log(formData)
@@ -63,7 +121,7 @@ export default {
     },
   },
   async created(){
-
+    this.userdata=this.user
     console.log(this.user)
   },
 

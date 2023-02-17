@@ -1,8 +1,6 @@
 <template>
   <MainBody>
-    <nav class="top-movies-nav">
-      <router-link class="top-nav-link" to="/">Top score</router-link>
-    </nav>
+
     <main class="top-main">
       <TopMovieTable :movies="MoviesList" />
       <Pagination />
@@ -12,6 +10,7 @@
 <script>
 import MainBody from '@/components/Mainbody.vue'
 import TopMovieTable from '@/components/Top Movies/TopMovieTable.vue'
+import axios from "axios";
 
 export default {
   name: 'TopMoviesView',
@@ -21,40 +20,30 @@ export default {
   },
   data() {
     return {
-      MoviesList: [
-        {
-          name: 'Movie',
-          userScore: '8',
-          avgScore: '8',
-          imgSrc: '',
-        },
-        {
-          name: 'Movie',
-          userScore: '8',
-          avgScore: '8',
-          imgSrc: '',
-        },
-        {
-          name: 'Movie',
-          userScore: '8',
-          avgScore: '8',
-          imgSrc: '',
-        },
-        {
-          name: 'Movie',
-          userScore: '8',
-          avgScore: '8',
-          imgSrc: '',
-        },
-        {
-          name: 'Movie',
-          userScore: '8',
-          avgScore: '8',
-          imgSrc: '',
-        },
-      ],
+      MoviesList: [ ],
     }
   },
+  async created(){
+
+    axios.get('movies')
+        .then(response => {
+          const movies = response.data;
+          const promises = movies.map(movie => {
+            return axios.get('getAvgRating/' + movie.id)
+                .then(res => {
+                  movie.rating = res.data;
+                  return movie;
+                });
+          });
+
+          Promise.all(promises).then(sortedMovies => {
+            this.MoviesList = sortedMovies.sort((a, b) => b.rating - a.rating);
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  }
 }
 </script>
 <style scoped>

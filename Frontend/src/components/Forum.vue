@@ -1,23 +1,22 @@
 <template>
-  <div :class="border ? 'border-forum forum-body' : 'forum-body'">
+  <div :class=" homePage ? 'forum-white-color forum-body' : 'forum-grey-color forum-body'">
     <div class="forums-figure" @click="goToUser(userid)">
+      <img src="../../public/Lissa.png" class="forum-img" />
       <div class="forums-credit">By: {{ UserName }}</div>
-      <div class="forums-credit">By: {{ userid }}</div>
-      <div class="forums-date">{{ submitDate }}</div>
-      <!-- <img src="../../public/Lissa.png" class="forum-img" /> -->
     </div>
     <div class="forum-information">
       <div class="forum-title" @click="goToForum(forumid,UserName)">{{ title }}</div>
       <div class="forum-content">
         {{ content }}
       </div>
+      <div class="forums-date">{{ submitDate }}</div>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: 'ForumsComponent',
-  props: ['UserName', 'submitDate', 'ImgUrl', 'title', 'content','userid','forumid', 'border'],
+  props: ['UserName', 'submitDate', 'ImgUrl', 'title', 'content','userid','forumid', 'homePage'],
   methods: {
     goToForum(forumid,user_name) {
       this.$router.push({ path: '/forum/' + forumid+'/' +user_name })
@@ -35,25 +34,29 @@ export default {
 .forum-body {
   display: flex;
   min-height: 15rem;
-  border-bottom: 1px solid var(--color-grey);
+  border-radius: 1rem;
+  margin: 1rem 0 1rem 0;
 }
-.border-forum {
-  border-left: 1px solid var(--color-grey);
-  border-right: 1px solid var(--color-grey);
+.forum-grey-color{
+  background-color: var(--primary-bg-color) ;
+}
+.forum-white-color{
+  background-color: var(--color-white) ;
 }
 .forum-img {
   height: 13rem;
-  width: 9rem;
+  width: 100%;
   object-fit: fill;
   margin: 0 1rem 0 0;
+  border-radius: 1rem 0rem 0 0;
 }
 .forums-figure {
-  width: 10%;
-  padding: 0.5rem;
-  border-right: 1px solid var(--color-grey);
+  width: 10rem;
+  padding: 0rem;
+  border-right: 1px solid var(--color-white);
 }
 .forum-information {
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
   width: 90%;
 }
 .forum-title {
@@ -71,5 +74,9 @@ export default {
   width: 98%;
   font-size: 20px;
   min-height: 10rem;
+}
+.forums-credit{
+  text-align: center;
+  color: var(--color-black);
 }
 </style>

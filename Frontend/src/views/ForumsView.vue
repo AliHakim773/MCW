@@ -14,6 +14,7 @@
             :content="forum.content"
             :userid="forum.user.id"
             :forumid="forum.id"
+            :home-page="false"
             :key="ForumsList.indexOf(forum)"
           />
         </div></main

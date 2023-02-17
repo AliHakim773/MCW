@@ -19,7 +19,7 @@
           <div class="title score">Score: {{ movieScore }} | 10</div>
         </div>
         <div class="dropdown-group">
-          <Categories :List="ListCategory" :movie_id="id" :withAdd="true" :type="typeadd" />
+          <Categories :List="ListCategory" :movie_id="id" withAdd="true" :type="typeadd" />
 
           <Dropdown
             class="dropdown-item"

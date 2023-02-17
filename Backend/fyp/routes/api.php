@@ -30,6 +30,7 @@ use App\Http\Controllers\ForumController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/users', [AuthController::class, 'index']);
 Route::get('/users/{id}', [AuthController::class, 'show']);
+Route::put('/users/{id}', [AuthController::class, 'update']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/updateProfileImage', [AuthController::class, 'updateProfileImage']);
 Route::apiResources([
@@ -51,6 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+    Route::post('/upload_image', [FunctionsUtilities::class, 'uploadImage']);
+
 
     Route::post('addMovieToList', function (Request $request) {
     $request->validate([
@@ -100,11 +104,12 @@ Route::post('unfollowUser', function (Request $request) {
 
     $function_utilities->unfollow($user_id, $followed_user_id);
 });
+Route::get('/get_users_by_letter/{letter}',[FunctionsUtilities::class,'get_users_by_letter']);
+Route::get('/get_movies_by_letter/{letter}',[FunctionsUtilities::class,'get_movies_by_letter']);
 Route::get('/isFollowed/{user_id}/{followed_user_id}', [FunctionsUtilities::class, 'isFollowed']);
 Route::get('/followers/{user_id}', [FunctionsUtilities::class, 'getFollowers']);
 Route::get('/userlistsOfUser/{user_id}', [FunctionsUtilities::class, 'get_user_lists_of_user']);
 Route::get('/moviesInList/{user_list_id}', [FunctionsUtilities::class, 'movies_in_list']);
 Route::get('/getAvgRating/{movie_id}', [MovieController::class, 'getAvgRating']);
-
 
 Route::get('/listsOfUser/{user_id}', [FunctionsUtilities::class, 'get_user_lists']);
