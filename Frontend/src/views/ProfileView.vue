@@ -8,7 +8,9 @@
             <div>Gender: male</div>
             <div>Age: 18</div>
           </div>
-          <button class="btn profile-btn">Add To List</button>
+          <router-link to="/list" class="btn profile-btn"
+            >Add To List</router-link
+          >
         </div>
         <div class="profile-followed-users div-comp-white">
           <div class="title profile-followed-header">
@@ -272,6 +274,8 @@ export default {
 }
 .profile-btn {
   margin-top: auto;
+  color: var(--color-black);
+  text-align: center;
   border: 1px solid var(--primary-color);
   background-color: var(--color-white);
 }

@@ -1,9 +1,7 @@
 <template>
   <Mainbody>
     <div class="home-wrapper">
-
       <main class="main-home">
-
         <Carousel class="carousel" :title="title" :link="link" />
         <Carousel class="carousel" :title="title2" :link="link" />
         <TopForums />
@@ -83,6 +81,7 @@ export default {
       listEntries:null,
     }
   },
+
   computed:{
     ...mapGetters(['user'])
   },
@@ -119,7 +118,6 @@ export default {
       });
     },
   }
-
 }
 </script>
 <style scoped>
