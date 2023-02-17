@@ -3,7 +3,7 @@
     <td class="t-rank">{{ rank }}</td>
     <td class="t-name">
       <div class="td-name">
-        <img src="../../../public/Lissa.png" class="t-img" />
+        <img :src="imgSrc" @click="goToMoviePage(id)" class="t-img" />
         <span>{{ name }}</span>
       </div>
     </td>
@@ -16,11 +16,16 @@
 
 export default {
   name: 'TopMoviesRow',
-  props: ['rank', 'name', 'imgSrc', 'userScore', 'avgScore'],
+  props: ['rank', 'name', 'imgSrc', 'userScore', 'avgScore','id'],
   data() {
     return {
       movies: [],
     }
   },
+  methods:{
+    goToMoviePage(id) {
+      this.$router.push({ path: '/movie/' + id })
+    }
+  }
 }
 </script>

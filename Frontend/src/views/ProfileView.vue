@@ -17,7 +17,7 @@
           </div>
           <div class="followed-users">
             <h1 v-for="usera in followersList" v-bind:key="usera.index"> {{usera.name}}/</h1>
-            <figure v-for="usera in followersList" v-bind:key="usera.index"><img class="list-img"   src="../../public/Lissa.png" /></figure>
+            <figure v-for="usera in followersList" v-bind:key="usera.index" @click="goToUser(usera.id)"><img class="list-img"   src="../../public/Lissa.png" /></figure>
 
           </div>
         </div>
@@ -26,8 +26,6 @@
         <div class="div-comp-white profile-comp">
           <div class="title">
             {{ username }} &nbsp; - &nbsp;
-
-
             <button  v-if="!followed" v-on:click="follow(ids)" class="small-link">Follow</button>
             <button v-else v-on:click="unfollow(ids)" class="small-link">UnFollow</button>
 
@@ -140,19 +138,8 @@ export default {
     },
     ...mapGetters(['user'])
   },
-  created() {
-    axios.get("isFollowed/"+this.id+"/"+this.user.id).then(response=>{
-      this.followed=response.data
-    }).catch(error=>{
-      console.log(error)
-    })
-    axios.get("followers/"+this.id).then(response=>{
-      this.followersList=response.data
-      console.log({"followers":response.data})
-    }).catch(error=>{
-      console.log(error)
-    })
-    axios.get('users/'+this.id )
+  async created() {
+   await axios.get('users/'+this.id )
         .then(response => {
 
           const user = response.data;
@@ -167,8 +154,26 @@ export default {
           console.log(error)
         });
 
+  await  axios.get("isFollowed/"+this.id+"/"+this.user.id).then(response=>{
+      this.followed=response.data
+    }).catch(error=>{
+      console.log(error)
+    })
+   await axios.get("followers/"+this.id).then(response=>{
+      this.followersList=response.data
+      console.log({"followers":response.data})
+    }).catch(error=>{
+      console.log(error)
+    })
+
   },
   methods:{
+    goToUser(user_id) {
+      this.$router.push({ path: '/profile/' + user_id })
+      this.$router.go()
+      // this.$router.push({ name: 'profile', params: { user_id } })
+
+    },
     async follow(id){
       if(this.followed){
         this.followed=false

@@ -144,37 +144,6 @@ export default {
     this.userimage="/"+this.user.image
   },
   methods:{
-    async follow(id){
-      if(this.followed){
-        this.followed=false
-      }else{
-        this.followed=true
-      }
-      const res = await axios.post('followUser', {
-        user_id:id ,
-        followed_user_id:this.user.id ,
-      })
-      console.log("follow")
-
-      console.log(id)
-     console.log(this.user.id)
-     console.log(res)
-    },
-    async unfollow(id){
-      if(this.followed){
-        this.followed=false
-      }else{
-        this.followed=true
-      }
-      const res = await axios.post('unfollowUser', {
-        user_id:this.user.id  ,
-        followed_user_id:id,
-      })
-      console.log("unfollow")
-      console.log(id)
-      console.log(this.user.id)
-      console.log(res)
-    }
   }
 }
 </script>

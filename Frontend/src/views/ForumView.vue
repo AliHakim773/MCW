@@ -15,7 +15,7 @@
         :content="forum.comment"
         :key="commentsList.indexOf(forum)"
         :userid="forum.user_id"
-        border="true"
+        :home-page="false"
       />
     </div>
   </Mainbody>

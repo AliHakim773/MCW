@@ -14,7 +14,7 @@
           :userid="forum.user.id"
           :forumid="forum.id"
           :key="ForumsList.indexOf(forum)"
-          border="false"
+          :home-page="true"
       />
 
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="list-small">
-    <figure><img class="list-img" src="../../public/Lissa.png" /></figure>
+    <figure><img class="list-img" :src="imgLink" /></figure>
     <div class="list-details">
       <div class="list-title">{{ title }}</div>
       <div class="list-status">{{ status }}</div>

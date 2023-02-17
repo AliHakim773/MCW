@@ -45,16 +45,30 @@ export default {
     }
   },
   created() {
+
     axios.get('movies')
         .then(response => {
-          if(this.title=="TOP"){
-            this.items = response.data.sort((a, b) => b.rating - a.rating);
-          }else{
-            this.items = response.data.sort((a, b) => b.created_at - a.created_at);
-          }
+          const movies = response.data;
+          const promises = movies.map(movie => {
+            return axios.get('getAvgRating/' + movie.id)
+                .then(res => {
+                  movie.rating = res.data;
+                  return movie;
+                });
+          });
+
+          Promise.all(promises).then(sortedMovies => {
+            if(this.title=="TOP"){
+              this.items = sortedMovies.sort((a, b) => b.rating - a.rating);
+
+            }else{
+              this.items = sortedMovies.sort((a, b) => b.id - a.id);
+
+            }
+          });
         })
         .catch(error => {
-          console.log(error)
+          console.log(error);
         });
   },
   methods: {

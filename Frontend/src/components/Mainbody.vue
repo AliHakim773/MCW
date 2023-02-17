@@ -3,48 +3,44 @@
     <nav class="site-nav-container">
       <div class="site-nav">
         <router-link class="site-nav-link" to="/">Home</router-link>
-<!--        <router-link class="site-nav-link" to="/login">login</router-link>-->
-<!--        <router-link class="site-nav-link" to="/register">Register</router-link>-->
-<!--        <router-link class="site-nav-link" to="/Movie">Movie</router-link>-->
-<!--        <router-link class="site-nav-link" to="/Profile">Profile</router-link>-->
         <router-link class="site-nav-link" to="/list">List</router-link>
         <router-link class="site-nav-link" to="/forums">Forums</router-link>
-        <router-link class="site-nav-link" to="/topmovies">Top Movies</router-link
-        >
+        <router-link class="site-nav-link" to="/topmovies">Top Movies</router-link>
       </div>
-      <div class="search">
-        <form>
-          <b-field label="Find a user">
-            <b-autocomplete
-                :data="data"
-                placeholder="e.g. AliMr"
-                field="title"
-                :loading="isFetching"
-                @typing="getAsyncData"
-                @select="option => onSelect(option)">
+<!--      <div class="search">-->
+<!--        <form>-->
+<!--          <b-field>-->
+<!--            <b-autocomplete-->
+<!--                :data="data"-->
+<!--                placeholder="Search Users"-->
+<!--                field="title"-->
+<!--                :loading="isFetching"-->
+<!--                @typing="getAsyncData"-->
+<!--                @select="option => onSelect(option)">-->
 
-              <template slot-scope="props">
-                <div class="media">
-                  <div class="media-left">
-                    <img width="32" src="../../public/Lissa.png">
-                  </div>
-                  <div class="media-content">
-                    {{ props.option.name }}
-                    <br>
+<!--              <template slot-scope="props">-->
+<!--                <div class="media">-->
+<!--                  <div class="media-left">-->
+<!--                    <img width="32" src="../../public/Lissa.png">-->
+<!--                  </div>-->
+<!--                  <div class="media-content">-->
+<!--                    {{ props.option.name }}-->
+<!--                    <br>-->
 
-                  </div>
-                </div>
-              </template>
-            </b-autocomplete>
-          </b-field>
-        </form>
-      </div>
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </template>-->
+<!--            </b-autocomplete>-->
+<!--          </b-field>-->
+<!--        </form>-->
+<!--      </div>-->
       <div class="search">
+<div class="search-movie">
         <form>
-          <b-field label="Find a movie">
+          <b-field>
             <b-autocomplete
                 :data="MovieData"
-                placeholder="e.g. Avatar"
+                placeholder="Search a Movie"
                 field="title"
                 :loading="isFetchingM"
                 @typing="getAsyncMovies"
@@ -65,6 +61,7 @@
             </b-autocomplete>
           </b-field>
         </form>
+</div>
       </div>
     </nav>
     <slot></slot>
@@ -92,6 +89,8 @@ export default {
       },
     }
   },
+  async created() {
+    },
   methods: {
     onSelect(option) {
       console.log(option.id);
